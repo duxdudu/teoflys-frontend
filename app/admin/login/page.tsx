@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axiosInstance from "@/lib/axios";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://teoflys-backend.onrender.com";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");

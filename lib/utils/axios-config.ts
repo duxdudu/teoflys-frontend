@@ -7,7 +7,7 @@ import {
 } from "./auth-storage";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000"}/api`,
 });
 
 let isRefreshing = false;

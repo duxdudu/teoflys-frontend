@@ -179,7 +179,7 @@ export default function Home() {
       try {
         console.log('🔍 Fetching photos from API...');
         const response = await axios.get(
-          "http://localhost:5000/api/gallery"
+          `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000"}/api/gallery`
         );
         console.log('📸 API Response:', response.data);
         console.log('📸 Photos array:', response.data.photos);
