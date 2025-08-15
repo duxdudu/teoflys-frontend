@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { X, Phone, Mail, MapPin, Facebook, InstagramIcon } from "lucide-react"
 import Link from "next/link"
-import { FaC, FaTiktok } from "react-icons/fa6"
+import { FaTiktok } from "react-icons/fa6"
 
 interface MobileNavProps {
   isOpen: boolean

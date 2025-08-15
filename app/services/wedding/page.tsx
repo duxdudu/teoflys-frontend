@@ -63,7 +63,7 @@ export default function WeddingServices() {
 
         <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Ready to Book Your Wedding?</h2>
-          <p className="text-yellow-100 mb-6">Let's discuss your special day and create beautiful memories together</p>
+          <p className="text-yellow-100 mb-6">Let&apos;s discuss your special day and create beautiful memories together</p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <a 
               href="tel:+212123456789"

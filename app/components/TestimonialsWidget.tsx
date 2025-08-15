@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,7 +36,7 @@ const serviceTypeColors: { [key: string]: string } = {
   other: 'bg-gray-500/20 text-gray-300 border-gray-500/30'
 };
 
-const serviceTypeIcons: { [key: string]: any } = {
+  const serviceTypeIcons: { [key: string]: React.ComponentType<{ className?: string }> } = {
   wedding: Heart,
   portrait: Users,
   landscape: Camera,
@@ -65,7 +65,7 @@ export default function TestimonialsWidget({
   const [selectedService, setSelectedService] = useState<string>('all');
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const fetchTestimonials = async () => {
+  const fetchTestimonials = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -73,17 +73,17 @@ export default function TestimonialsWidget({
       const response = await axios.get(`/api/testimonials/published?limit=${maxItems * 2}`);
       setTestimonials(response.data.testimonials);
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       setError('Failed to load testimonials');
       console.error('Error fetching testimonials:', error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [maxItems]);
 
   useEffect(() => {
     fetchTestimonials();
-  }, [maxItems]);
+  }, [fetchTestimonials]);
 
   useEffect(() => {
     if (variant === 'carousel' && testimonials.length > 0) {
@@ -177,9 +177,9 @@ export default function TestimonialsWidget({
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-gray-300 line-clamp-2">
-                  "{testimonial.message}"
-                </p>
+                                  <p className="text-sm text-gray-300 line-clamp-2">
+                    &ldquo;{testimonial.message}&rdquo;
+                  </p>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-xs text-white font-medium">{testimonial.name}</span>
                   <Badge className={`${serviceTypeColors[testimonial.serviceType]} text-xs px-2 py-0`}>
@@ -210,9 +210,9 @@ export default function TestimonialsWidget({
         <Card className="bg-white/5 backdrop-blur-sm border-white/10 relative">
           <CardContent className="p-6">
             <Quote className="w-6 h-6 text-yellow-400/60 mb-3 mx-auto" />
-            <blockquote className="text-gray-300 text-center mb-4 italic">
-              "{currentTestimonial.message}"
-            </blockquote>
+                            <blockquote className="text-gray-300 text-center mb-4 italic">
+                  &ldquo;{currentTestimonial.message}&rdquo;
+                </blockquote>
             <div className="text-center">
               <div className="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-2">
                 <span className="text-yellow-400 font-bold text-sm">
@@ -331,7 +331,7 @@ export default function TestimonialsWidget({
                     </Badge>
                   </div>
                   <blockquote className="text-gray-300 text-sm italic mb-2">
-                    "{testimonial.message}"
+                    &ldquo;{testimonial.message}&rdquo;
                   </blockquote>
                   <div className="flex items-center justify-between">
                     <span className="text-white font-medium text-sm">{testimonial.name}</span>

@@ -101,7 +101,7 @@ export async function GET(request: NextRequest) {
 
       const backendData = await response.json();
 
-      const normalized = (backendData?.testimonials || []).map((t: any) => ({
+      const normalized = (backendData?.testimonials || []).map((t: { serviceType?: string; category?: string }) => ({
         ...t,
         serviceType: t.serviceType || t.category || 'other'
       }));
@@ -112,14 +112,14 @@ export async function GET(request: NextRequest) {
         testimonials: normalized,
         pagination: {
           currentPage: Number(pagination.currentPage ?? page),
-          totalPages: Number(pagination.totalPages ?? Math.ceil(normalized.length / limit) || 1),
+          totalPages: Number(pagination.totalPages ?? (Math.ceil(normalized.length / limit) || 1)),
           total: Number(pagination.total ?? normalized.length),
           limit: Number(pagination.limit ?? limit),
           hasNext: Boolean(pagination.hasNext ?? (Number(pagination.currentPage ?? page) * Number(pagination.limit ?? limit) < Number(pagination.total ?? normalized.length))),
           hasPrev: Boolean(pagination.hasPrev ?? (Number(pagination.currentPage ?? page) > 1))
         }
       });
-    } catch (e) {
+    } catch {
       // Fallback to local mock
       const filtered = category && category !== 'all' ? mockPublishedTestimonials.filter(t => t.category === category) : mockPublishedTestimonials;
       const start = (page - 1) * limit;

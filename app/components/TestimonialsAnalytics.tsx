@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -60,7 +60,7 @@ export default function TestimonialsAnalytics() {
   const [error, setError] = useState('');
   const [timeRange, setTimeRange] = useState('30d');
 
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -81,17 +81,17 @@ export default function TestimonialsAnalytics() {
         recentActivity: data.recentActivity ?? [],
       });
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       setError('Failed to load analytics data');
       console.error('Error fetching analytics:', error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [timeRange]);
 
   useEffect(() => {
     fetchAnalytics();
-  }, [timeRange]);
+  }, [fetchAnalytics]);
 
   const exportData = () => {
     if (!analytics) return;
@@ -156,7 +156,6 @@ export default function TestimonialsAnalytics() {
   if (!analytics) return null;
 
   const approvalRate = analytics.total > 0 ? ((analytics.approved / analytics.total) * 100).toFixed(1) : '0';
-  const publishRate = analytics.total > 0 ? ((analytics.published / analytics.total) * 100).toFixed(1) : '0';
 
   return (
       <div className="space-y-6">

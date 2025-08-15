@@ -4,11 +4,12 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:500
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params;
     const body = await request.json();
-    const response = await fetch(`${BACKEND_URL}/api/testimonials/admin/approve/${params.id}`, {
+    const response = await fetch(`${BACKEND_URL}/api/testimonials/admin/approve/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -35,10 +36,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const response = await fetch(`${BACKEND_URL}/api/testimonials/admin/${params.id}`, {
+    const { id } = await context.params;
+    const response = await fetch(`${BACKEND_URL}/api/testimonials/admin/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': request.headers.get('Authorization') || '',

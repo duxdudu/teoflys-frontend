@@ -63,7 +63,7 @@ export default function PortraitServices() {
 
         <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Book Your Portrait Session</h2>
-          <p className="text-blue-100 mb-6">Let's create stunning portraits that capture your personality</p>
+          <p className="text-blue-100 mb-6">Let&apos;s create stunning portraits that capture your personality</p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <a 
               href="tel:+212123456789"

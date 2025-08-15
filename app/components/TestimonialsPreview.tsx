@@ -78,7 +78,7 @@ export default function TestimonialsPreview() {
       setLoading(true);
       const response = await axios.get<TestimonialsResponse>('/api/testimonials/published?limit=3');
       setTestimonials(response.data.testimonials);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching testimonials:', error);
     } finally {
       setLoading(false);
@@ -118,7 +118,7 @@ export default function TestimonialsPreview() {
     setErrorMessage('');
 
     try {
-      const response = await axios.post('/api/testimonials/submit', formData);
+      await axios.post('/api/testimonials/submit', formData);
       
       setSubmitStatus('success');
       setFormData({
@@ -138,12 +138,10 @@ export default function TestimonialsPreview() {
         setShowForm(false);
       }, 5000);
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       setSubmitStatus('error');
-      setErrorMessage(
-        error.response?.data?.error || 
-        'Failed to submit testimonial. Please try again.'
-      );
+      const errorMessage = axios.isAxiosError(error) ? error.response?.data?.error : 'Failed to submit testimonial. Please try again.';
+      setErrorMessage(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -236,9 +234,9 @@ export default function TestimonialsPreview() {
                       {testimonial.rating}/5
                     </span>
                   </div>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">
-                    "{testimonial.message}"
-                  </p>
+                                  <p className="text-gray-300 text-sm leading-relaxed mb-3">
+                  &ldquo;{testimonial.message}&rdquo;
+                </p>
                   <p className="text-xs text-gray-400">
                     {formatDate(testimonial.createdAt)}
                   </p>

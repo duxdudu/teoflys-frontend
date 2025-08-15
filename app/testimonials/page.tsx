@@ -59,9 +59,9 @@ export default function TestimonialsPage() {
                       </svg>
                     ))}
                   </div>
-                  <blockquote className="text-lg text-gray-700 italic mb-6 leading-relaxed">
-                    "The photography team exceeded all our expectations! They captured every precious moment of our wedding with such artistry and attention to detail. The photos are absolutely stunning and we couldn't be happier with the results."
-                  </blockquote>
+                              <blockquote className="text-lg text-gray-700 italic mb-6 leading-relaxed">
+              &ldquo;The photography team exceeded all our expectations! They captured every precious moment of our wedding with such artistry and attention to detail. The photos are absolutely stunning and we couldn&apos;t be happier with the results.&rdquo;
+            </blockquote>
                   <div className="flex items-center justify-center gap-4">
                     <div className="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center">
                       <span className="text-yellow-600 font-bold text-lg">S</span>
@@ -95,7 +95,7 @@ export default function TestimonialsPage() {
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Share Your Experience</h2>
               <p className="text-gray-600">
-                Had a great experience with our services? We'd love to hear about it!
+                Had a great experience with our services? We&apos;d love to hear about it!
               </p>
             </div>
             <div className="max-w-2xl mx-auto">
@@ -113,7 +113,7 @@ export default function TestimonialsPage() {
             <div className="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg p-8 text-white">
               <h3 className="text-2xl font-bold mb-4">Ready to Create Amazing Memories?</h3>
               <p className="text-lg mb-6 opacity-90">
-                Let's work together to capture your special moments with professional photography
+                Let&apos;s work together to capture your special moments with professional photography
               </p>
               <button className="bg-white text-yellow-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                 Get Started Today

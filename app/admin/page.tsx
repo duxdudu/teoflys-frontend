@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Upload, Image as ImageIcon, Trash2, Edit3, Eye, EyeOff, Plus, CheckCircle, AlertCircle, LogOut, User, ArrowLeft, MessageCircle } from "lucide-react";
 import { useToastContext } from "@/components/ui/toast-provider";
@@ -67,30 +68,7 @@ export default function AdminDashboard() {
     { value: "other", label: "Other" }
   ];
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    const userData = localStorage.getItem("user");
-    
-    if (!token || !userData) {
-      router.push("/admin/login");
-      return;
-    }
-
-    try {
-      const user = JSON.parse(userData);
-      setAdminUser(user);
-    } catch (error) {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("user");
-      router.push("/admin/login");
-      return;
-    }
-
-    fetchGallery();
-  }, [router]);
-
-  const fetchGallery = async () => {
+  const fetchGallery = useCallback(async () => {
     try {
       const token = localStorage.getItem("accessToken");
       const response = await fetch(`${BACKEND_URL}/api/admin/photos`, {
@@ -119,7 +97,30 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const userData = localStorage.getItem("user");
+    
+    if (!token || !userData) {
+      router.push("/admin/login");
+      return;
+    }
+
+    try {
+      const user = JSON.parse(userData);
+      setAdminUser(user);
+    } catch {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("user");
+      router.push("/admin/login");
+      return;
+    }
+
+    fetchGallery();
+  }, [router, fetchGallery]);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
@@ -434,9 +435,11 @@ export default function AdminDashboard() {
               {gallery.map((img) => (
                 <div key={img._id} className="bg-gray-50 rounded-lg overflow-hidden border border-gray-200 hover:shadow-md transition-shadow duration-200">
                   <div className="relative aspect-square">
-                    <img 
+                    <Image 
                       src={img.imageUrl} 
                       alt={img.title} 
+                      width={300}
+                      height={300}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-2 right-2">

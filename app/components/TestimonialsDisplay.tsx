@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Star, Quote, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Testimonial {
@@ -52,7 +52,7 @@ export function TestimonialsDisplay({
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
 
-  const fetchTestimonials = async () => {
+  const fetchTestimonials = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -83,11 +83,11 @@ export function TestimonialsDisplay({
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, selectedCategory, maxItems]);
 
   useEffect(() => {
     fetchTestimonials();
-  }, [currentPage, selectedCategory, maxItems]);
+  }, [fetchTestimonials]);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (

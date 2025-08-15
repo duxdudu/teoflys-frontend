@@ -63,7 +63,7 @@ export default function EventsServices() {
 
         <div className="bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Book Your Event Photography</h2>
-          <p className="text-green-100 mb-6">Let's capture your special moments with professional photography</p>
+          <p className="text-green-100 mb-6">Let&apos;s capture your special moments with professional photography</p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <a 
               href="tel:+212123456789"

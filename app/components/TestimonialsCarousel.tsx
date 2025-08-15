@@ -54,7 +54,7 @@ export default function TestimonialsCarousel() {
       const response = await axios.get('/api/testimonials/published?limit=10');
       setTestimonials(response.data.testimonials);
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       setError('Failed to load testimonials');
       console.error('Error fetching testimonials:', error);
     } finally {
@@ -186,7 +186,7 @@ export default function TestimonialsCarousel() {
               </div>
               
               {/* Quote */}
-              <blockquote className="text-base sm:text-xl text-white italic mb-6 leading-relaxed max-w-3xl mx-auto">"{currentTestimonial.message}"</blockquote>
+                              <blockquote className="text-base sm:text-xl text-white italic mb-6 leading-relaxed max-w-3xl mx-auto">&ldquo;{currentTestimonial.message}&rdquo;</blockquote>
 
               {currentTestimonial.adminNotes && (
                 <div className="mb-6 max-w-2xl mx-auto p-4 bg-white/5 border border-white/10 rounded-lg">

@@ -2,11 +2,11 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Star, Quote, Heart, Camera, Users, Award, ArrowRight, MessageCircle } from "lucide-react";
+import { Star, Quote, ArrowRight } from "lucide-react";
 import axios from "axios";
 import Link from "next/link";
 
@@ -41,15 +41,7 @@ const categoryColors: { [key: string]: string } = {
   other: 'bg-gray-500/20 text-gray-300 border-gray-500/30'
 };
 
-const categoryIcons: { [key: string]: any } = {
-  wedding: Heart,
-  portrait: Users,
-  landscape: Camera,
-  food: Camera,
-  events: Camera,
-  commercial: Award,
-  other: Camera
-};
+
 
 // Fallback testimonials in case API fails
 const fallbackTestimonials: Testimonial[] = [
@@ -96,7 +88,7 @@ export default function TestimonialsShowcase({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const fetchTestimonials = async () => {
+  const fetchTestimonials = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -122,11 +114,11 @@ export default function TestimonialsShowcase({
     } finally {
       setLoading(false);
     }
-  };
+  }, [maxItems]);
 
   useEffect(() => {
     fetchTestimonials();
-  }, [maxItems]);
+  }, [fetchTestimonials]);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => {

@@ -27,8 +27,6 @@ import {
   ChevronRight,
   Menu,
   StarIcon,
-  Facebook,
-  LinkIcon,
   InstagramIcon,
   YoutubeIcon,
   ArrowUp,
@@ -911,7 +909,7 @@ This message was sent from the Teoflys Photography website contact form.
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {portfolioProjects.map((project, index) => (
+            {portfolioProjects.map((project) => (
               <Card 
                 key={project.id}
                 className="group bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer hover:scale-105"
@@ -1146,9 +1144,11 @@ This message was sent from the Teoflys Photography website contact form.
                   className="group relative aspect-square overflow-hidden rounded-lg cursor-pointer bg-gray-200 dark:bg-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                   onClick={() => setSelectedPhoto(photo)}
                 >
-                  <img
+                  <Image
                     src={photo.imageUrl}
                     alt={photo.title}
+                    width={400}
+                    height={400}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     onError={(e) => {
                       console.error('❌ Image failed to load:', photo.imageUrl);
@@ -1205,9 +1205,11 @@ This message was sent from the Teoflys Photography website contact form.
                 >
                   Close
                 </button>
-                <img
+                <Image
                   src={selectedPhoto.imageUrl}
                   alt={selectedPhoto.title}
+                  width={800}
+                  height={600}
                   className="w-full h-full object-contain"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
@@ -2042,7 +2044,7 @@ This message was sent from the Teoflys Photography website contact form.
                   { name: 'COMMERCIAL', link: '/services/commercial' },
                   { name: 'FOOD', link: '/services/food' },
                   { name: 'LANDSCAPE', link: '/services/landscape' }
-                ].map((service, index) => (
+                ].map((service) => (
                   <li key={service.name} className="group/item">
                     <a 
                       href={service.link} 
@@ -2063,7 +2065,7 @@ This message was sent from the Teoflys Photography website contact form.
                 <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-orange-500 group-hover:w-full transition-all duration-300"></div>
               </h4>
               <ul className="space-y-3">
-                {['ABOUT', 'PORTFOLIO', 'CONTACT', 'BLOG', 'TESTIMONIALS', 'PRICING'].map((item, index) => (
+                {['ABOUT', 'PORTFOLIO', 'CONTACT', 'BLOG', 'TESTIMONIALS', 'PRICING'].map((item) => (
                   <li key={item} className="group/item">
                     <a href="#" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-yellow-500 dark:hover:text-yellow-400 transition-all duration-300 text-sm sm:text-base group-hover/item:translate-x-1">
                       <div className="w-1 h-1 bg-yellow-500 rounded-full opacity-0 group-hover/item:opacity-100 transition-opacity duration-300"></div>
@@ -2164,7 +2166,7 @@ This message was sent from the Teoflys Photography website contact form.
                     borderColor: 'border-red-200 dark:border-red-800',
                     textColor: 'text-red-600 dark:text-red-400'
                   }
-                ].map((social, index) => (
+                ].map((social) => (
                   <a
                     key={social.name}
                     href="#"
@@ -2232,17 +2234,17 @@ This message was sent from the Teoflys Photography website contact form.
       </button>
 
       {/* Admin Dashboard Link (visible only if accessToken exists) */}
-      {typeof window !== 'undefined' && localStorage.getItem('accessToken') && (
+      {/* {typeof window !== 'undefined' && localStorage.getItem('accessToken') && ( */}
         <div className="fixed bottom-4 left-4 z-50">
           <Link 
             href="/admin" 
             className="flex items-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
           >
-            <span className="hidden sm:inline">Admin</span>
-            <span className="sm:hidden">A</span>
+            <span className="hidden sm:inline">Teoflys</span>
+            <span className="sm:hidden">T</span>
           </Link>
         </div>
-      )}
+      {/* )} */}
     </div>
   );
 }

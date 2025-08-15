@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Star, CheckCircle, XCircle, Eye, Trash2, Filter, BarChart3, MessageCircle, ArrowLeft } from "lucide-react";
+import { Star, CheckCircle, XCircle, Eye, Trash2, BarChart3, MessageCircle, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import axios from "axios";
@@ -134,7 +134,7 @@ export default function AdminTestimonials() {
       setPagination(response.data.pagination);
       setCurrentPage(page);
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       setError('Failed to load testimonials. Please try again.');
       console.error('Error fetching testimonials:', error);
     } finally {
@@ -195,7 +195,7 @@ export default function AdminTestimonials() {
         setPendingDeleteId(selectedTestimonial._id);
         return setConfirmOpen(true);
       } else {
-        const updateData: any = {};
+        const updateData: Record<string, unknown> = {};
         
         if (action === 'approve') {
           updateData.isApproved = true;
@@ -230,9 +230,10 @@ export default function AdminTestimonials() {
       // Refresh stats
       fetchStats();
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(`Error ${action}ing testimonial:`, error);
-      alert(`Failed to ${action} testimonial: ${error.response?.data?.error || 'Unknown error'}`);
+      const errorMessage = axios.isAxiosError(error) ? error.response?.data?.error : 'Unknown error';
+      alert(`Failed to ${action} testimonial: ${errorMessage}`);
     } finally {
       setActionLoading(null);
     }
@@ -506,7 +507,7 @@ export default function AdminTestimonials() {
                           </span>
                         </div>
                         
-                        <p className="text-gray-700 dark:text-gray-300 mb-2">"{testimonial.message}"</p>
+                        <p className="text-gray-700 dark:text-gray-300 mb-2">&ldquo;{testimonial.message}&rdquo;</p>
                         
                         <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
                           <span className="truncate">{testimonial.email}</span>
@@ -610,7 +611,7 @@ export default function AdminTestimonials() {
                     {selectedTestimonial.rating}/5
                   </span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">"{selectedTestimonial.message}"</p>
+                <p className="text-gray-700 dark:text-gray-300">&ldquo;{selectedTestimonial.message}&rdquo;</p>
               </div>
               
               <div>
