@@ -176,23 +176,56 @@ export default function Home() {
     const fetchPhotos = async () => {
       try {
         console.log('🔍 Fetching photos from API...');
+        console.log('🌐 Backend URL:', 'https://teoflys-backend.onrender.com/api/gallery');
+        
+        // First, let's test if the backend is accessible
+        try {
+          const healthResponse = await axios.get('https://teoflys-backend.onrender.com/api/health');
+          console.log('✅ Backend health check successful:', healthResponse.data);
+        } catch (healthError) {
+          console.error('❌ Backend health check failed:', healthError);
+        }
+        
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000"}/api/gallery`
+          `https://teoflys-backend.onrender.com/api/gallery`
         );
-        console.log('📸 API Response:', response.data);
+        
+        console.log('📸 API Response Status:', response.status);
+        console.log('📸 API Response Headers:', response.headers);
+        console.log('📸 API Response Data:', response.data);
         console.log('📸 Photos array:', response.data.photos);
         console.log('📸 Number of photos:', response.data.photos?.length || 0);
         
         if (response.data.photos && response.data.photos.length > 0) {
           console.log('✅ First photo details:', response.data.photos[0]);
+          setPhotos(response.data.photos);
         } else {
           console.log('⚠️ No photos found in response');
+          setPhotos([]);
         }
         
-        setPhotos(response.data.photos || []);
         setLoading(false);
-      } catch (error) {
+      } catch (error: any) {
         console.error("❌ Error fetching photos:", error);
+        console.error("❌ Error details:", {
+          message: error.message,
+          status: error.response?.status,
+          statusText: error.response?.statusText,
+          data: error.response?.data,
+          config: error.config
+        });
+        
+        if (error.response?.status === 404) {
+          console.error("❌ 404: Gallery endpoint not found");
+        } else if (error.response?.status === 403) {
+          console.error("❌ 403: CORS issue - Access forbidden");
+        } else if (error.code === 'ECONNREFUSED') {
+          console.error("❌ Connection refused - Backend not accessible");
+        } else if (error.code === 'ENOTFOUND') {
+          console.error("❌ Host not found - Check backend URL");
+        }
+        
+        setPhotos([]);
         setLoading(false);
       }
     };
