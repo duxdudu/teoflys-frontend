@@ -4,7 +4,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import axios from "axios";
 import { Badge } from "@/components/ui/badge";
 import {
   Accordion,
@@ -42,6 +41,7 @@ import { MobileNav } from "@/components/mobile-nav";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { BsSnapchat } from "react-icons/bs";
 import TestimonialsShowcase from "@/app/components/TestimonialsShowcase";
+import api from "@/lib/utils/axios-config";
 // import { MobileNav } from "@/components/mobile-nav"
 
 interface Photo {
@@ -176,19 +176,26 @@ export default function Home() {
     const fetchPhotos = async () => {
       try {
         console.log('🔍 Fetching photos from API...');
-        console.log('🌐 Backend URL:', 'https://teoflys-backend.onrender.com/api/gallery');
+        console.log('🌐 Using API base URL:', api.defaults.baseURL);
         
         // First, let's test if the backend is accessible
         try {
-          const healthResponse = await axios.get('https://teoflys-backend.onrender.com/api/health');
+          const healthResponse = await api.get('/health');
           console.log('✅ Backend health check successful:', healthResponse.data);
-        } catch (healthError) {
+        } catch (healthError: any) {
           console.error('❌ Backend health check failed:', healthError);
+          console.error('❌ Health check error details:', {
+            message: healthError.message,
+            status: healthError.response?.status,
+            statusText: healthError.response?.statusText,
+            data: healthError.response?.data,
+            config: healthError.config
+          });
         }
         
-        const response = await axios.get(
-          `https://teoflys-backend.onrender.com/api/gallery`
-        );
+        // Test the gallery endpoint directly
+        console.log('📸 Testing gallery endpoint...');
+        const response = await api.get('/gallery');
         
         console.log('📸 API Response Status:', response.status);
         console.log('📸 API Response Headers:', response.headers);
@@ -198,9 +205,11 @@ export default function Home() {
         
         if (response.data.photos && response.data.photos.length > 0) {
           console.log('✅ First photo details:', response.data.photos[0]);
+          console.log('✅ First photo image URL:', response.data.photos[0].imageUrl);
           setPhotos(response.data.photos);
         } else {
           console.log('⚠️ No photos found in response');
+          console.log('⚠️ Response structure:', Object.keys(response.data));
           setPhotos([]);
         }
         
@@ -212,7 +221,8 @@ export default function Home() {
           status: error.response?.status,
           statusText: error.response?.statusText,
           data: error.response?.data,
-          config: error.config
+          config: error.config,
+          baseURL: api.defaults.baseURL
         });
         
         if (error.response?.status === 404) {
@@ -223,6 +233,8 @@ export default function Home() {
           console.error("❌ Connection refused - Backend not accessible");
         } else if (error.code === 'ENOTFOUND') {
           console.error("❌ Host not found - Check backend URL");
+        } else if (error.code === 'NETWORK_ERROR') {
+          console.error("❌ Network error - Check internet connection");
         }
         
         setPhotos([]);
@@ -1161,6 +1173,26 @@ This message was sent from the Teoflys Photography website contact form.
             <p className="text-gray-600 dark:text-gray-400 text-lg">
               Explore our latest photography work and creative projects
             </p>
+            
+            {/* Debug button - remove in production */}
+            <div className="mt-4">
+              <button
+                onClick={async () => {
+                  console.log('🧪 Manual API test...');
+                  try {
+                    const response = await api.get('/gallery');
+                    console.log('✅ Manual test successful:', response.data);
+                    alert(`Gallery API working! Found ${response.data.photos?.length || 0} photos`);
+                  } catch (error: any) {
+                    console.error('❌ Manual test failed:', error);
+                    alert(`Gallery API failed: ${error.message}`);
+                  }
+                }}
+                className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm transition-colors"
+              >
+                🧪 Test Gallery API
+              </button>
+            </div>
           </div>
 
           {loading ? (
@@ -1169,57 +1201,100 @@ This message was sent from the Teoflys Photography website contact form.
                 <Skeleton key={i} className="aspect-square rounded-lg" />
               ))}
             </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {photos.map((photo) => (
-                <div
-                  key={photo._id}
-                  className="group relative aspect-square overflow-hidden rounded-lg cursor-pointer bg-gray-200 dark:bg-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                  onClick={() => setSelectedPhoto(photo)}
-                >
-                  <Image
-                    src={photo.imageUrl}
-                    alt={photo.title}
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    onError={(e) => {
-                      console.error('❌ Image failed to load:', photo.imageUrl);
-                      e.currentTarget.style.display = 'none';
-                    }}
-                    onLoad={() => {
-                      console.log('✅ Image loaded successfully:', photo.title);
-                    }}
-                  />
-                  
-                  {/* Enhanced overlay with better typography and design */}
-                  <div className="absolute inset-0 flex items-end opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                    <div className="w-full p-6 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
-                      {/* Category badge */}
-                      <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full mb-3 border border-white/30">
-                        <span className="text-xs font-medium text-white uppercase tracking-wider">
-                          {photo.category}
-                        </span>
+          ) : photos.length > 0 ? (
+            <>
+              {/* Debug info - remove this in production */}
+              <div className="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  📸 Loaded {photos.length} photos successfully
+                </p>
+                <p className="text-xs text-blue-600 dark:text-blue-300 mt-1">
+                  First photo: {photos[0]?.title} - {photos[0]?.imageUrl}
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {photos.map((photo) => (
+                  <div
+                    key={photo._id}
+                    className="group relative aspect-square overflow-hidden rounded-lg cursor-pointer bg-gray-200 dark:bg-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                    onClick={() => setSelectedPhoto(photo)}
+                  >
+                    <Image
+                      src={photo.imageUrl}
+                      alt={photo.title}
+                      width={400}
+                      height={400}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      onError={(e) => {
+                        console.error('❌ Image failed to load:', photo.imageUrl);
+                        console.error('❌ Photo data:', photo);
+                        // Show a fallback or error state
+                        e.currentTarget.style.display = 'none';
+                        // Add a fallback div
+                        const fallbackDiv = document.createElement('div');
+                        fallbackDiv.className = 'w-full h-full flex items-center justify-center bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-400';
+                        fallbackDiv.innerHTML = `
+                          <div class="text-center">
+                            <div class="text-2xl mb-2">📸</div>
+                            <div class="text-sm font-medium">${photo.title}</div>
+                            <div class="text-xs opacity-75">Image unavailable</div>
+                          </div>
+                        `;
+                        e.currentTarget.parentNode?.appendChild(fallbackDiv);
+                      }}
+                      onLoad={() => {
+                        console.log('✅ Image loaded successfully:', photo.title);
+                        console.log('✅ Image URL:', photo.imageUrl);
+                      }}
+                      unoptimized={true}
+                    />
+                    
+                    {/* Enhanced overlay with better typography and design */}
+                    <div className="absolute inset-0 flex items-end opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                      <div className="w-full p-6 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                        {/* Category badge */}
+                        <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full mb-3 border border-white/30">
+                          <span className="text-xs font-medium text-white uppercase tracking-wider">
+                            {photo.category}
+                          </span>
+                        </div>
+                        
+                        {/* Photo title */}
+                        <h3 className="text-xl font-bold text-white mb-2 leading-tight drop-shadow-lg">
+                          {photo.title}
+                        </h3>
+                        
+                        {/* Optional description or additional info */}
+                        {photo.description && (
+                          <p className="text-sm text-white/80 leading-relaxed line-clamp-2">
+                            {photo.description}
+                          </p>
+                        )}
                       </div>
-                      
-                      {/* Photo title */}
-                      <h3 className="text-xl font-bold text-white mb-2 leading-tight drop-shadow-lg">
-                        {photo.title}
-                      </h3>
-                      
-                      {/* Optional description or additional info */}
-                      {photo.description && (
-                        <p className="text-sm text-white/80 leading-relaxed line-clamp-2">
-                          {photo.description}
-                        </p>
-                      )}
                     </div>
+                    
+                    {/* Subtle overlay that's always visible */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  
-                  {/* Subtle overlay that's always visible */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              ))}
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">📸</div>
+              <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                No Photos Available
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400 mb-4">
+                We couldn't load the gallery photos at the moment.
+              </p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-black rounded-lg transition-colors"
+              >
+                Try Again
+              </button>
             </div>
           )}
         </div>

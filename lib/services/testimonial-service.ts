@@ -12,7 +12,7 @@ export interface Testimonial {
 export const getApprovedTestimonials = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000"}/api/testimonials/approved`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL || "https://teoflys-backend.onrender.com"}/api/testimonials/approved`
     );
     return response.data;
   } catch (error) {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+  process.env.NEXT_PUBLIC_BACKEND_URL || "https://teoflys-backend.onrender.com";
 
 const axiosInstance = axios.create({
   baseURL: BACKEND_URL,
