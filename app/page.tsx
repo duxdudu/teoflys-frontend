@@ -177,7 +177,7 @@ export default function Home() {
       try {
         // First, let's test if the backend is accessible
         try {
-          const healthResponse = await api.get('/health');
+          await api.get('/health');
           console.log('✅ Backend health check successful');
         } catch (healthError: unknown) {
           const error = healthError as { message?: string; response?: { status?: number; statusText?: string; data?: unknown }; config?: unknown };

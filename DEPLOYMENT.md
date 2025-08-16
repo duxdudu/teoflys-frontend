@@ -27,8 +27,23 @@ The application is configured with `unoptimized: true` for images to ensure comp
 
 1. **Set Environment Variables**: Add the above environment variables to your hosting platform
 2. **Build Command**: `npm run build`
-3. **Output Directory**: `.next` (for Vercel) or `out` (for static export)
+3. **Output Directory**: `.next` (for server deployment)
 4. **Install Command**: `npm install`
+
+### For Server Deployment (Current Configuration)
+
+Since you have API routes that need to handle dynamic requests:
+- Use `.next` as your output directory
+- Deploy to platforms that support Node.js (Vercel, Netlify Functions, etc.)
+- This allows your API routes to function properly
+
+### For Static Export
+
+If you want to create a static export instead:
+- Add `output: "export"` to `next.config.ts`
+- Remove all API routes (they cannot be statically exported)
+- Handle all backend communication client-side
+- Use `out` as your output directory for static hosting platforms
 
 ## Troubleshooting
 
