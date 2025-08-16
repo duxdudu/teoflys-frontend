@@ -2,11 +2,52 @@
 
 import { TestimonialsDisplay } from '../components/TestimonialsDisplay';
 import { TestimonialForm } from '../components/TestimonialForm';
+import { ArrowLeft } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export default function TestimonialsPage() {
+  const router = useRouter();
+  const [showFloatingButton, setShowFloatingButton] = useState(false);
+
+  // Show floating button when scrolling down
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowFloatingButton(window.scrollY > 200);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="py-20">
+        {/* Back Button - Fixed positioning and styling */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+          <button
+            onClick={() => router.push("/")}
+            className="flex items-center space-x-1 sm:space-x-2 text-gray-600 hover:text-blue-600 transition-colors px-3 sm:px-4 py-2 rounded-lg hover:bg-white/50 backdrop-blur-sm border border-gray-200/50 shadow-sm"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="font-medium text-sm sm:text-base">
+              <span className="hidden sm:inline">Back to Home</span>
+              <span className="sm:hidden">Back</span>
+            </span>
+          </button>
+        </div>
+
+        {/* Floating Back Button */}
+        {showFloatingButton && (
+          <button
+            onClick={() => router.push("/")}
+            className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+            aria-label="Back to Home"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+        )}
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section */}
           <div className="text-center space-y-4 mb-16">

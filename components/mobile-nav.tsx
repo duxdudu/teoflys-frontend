@@ -137,14 +137,20 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
          <div className="px-6 py-6 border-t border-gray-200 dark:border-gray-800 flex-shrink-0">
           <h3 className="text-yellow-500 dark:text-yellow-400 font-semibold mb-4">Contact Info</h3>
           <div className="space-y-3">
-            <div className="flex items-center gap-3">
+            <a 
+              href="tel:+212620487204"
+              className="flex items-center gap-3 hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors"
+            >
               <Phone className="w-4 h-4 text-yellow-500 dark:text-yellow-400 flex-shrink-0" />
-              <span className="text-gray-600 dark:text-gray-300 text-sm">+250 786 885 185</span>
-            </div>
-            <div className="flex items-center gap-3">
+              <span className="text-gray-600 dark:text-gray-300 text-sm hover:underline">+212 620-487204</span>
+            </a>
+            <a 
+              href="mailto:theonyn11@gmail.com"
+              className="flex items-center gap-3 hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors"
+            >
               <Mail className="w-4 h-4 text-yellow-500 dark:text-yellow-400 flex-shrink-0" />
-              <span className="text-gray-600 dark:text-gray-300 text-sm">teofly@gmail.com</span>
-            </div>
+              <span className="text-gray-600 dark:text-gray-300 text-sm hover:underline">theonyn11@gmail.com</span>
+            </a>
             <div className="flex items-center gap-3">
               <MapPin className="w-4 h-4 text-yellow-500 dark:text-yellow-400 flex-shrink-0" />
               <span className="text-gray-600 dark:text-gray-300 text-sm">Marroco, Rabat</span>
@@ -155,23 +161,43 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
                  {/* Social Links */}
          <div className="px-6 py-4 flex-shrink-0">
           <div className="flex gap-3">
-            <div className="w-10 h-10 bg-yellow-500 dark:bg-yellow-400 rounded-full flex items-center justify-center hover:bg-yellow-600 dark:hover:bg-yellow-500 transition-colors cursor-pointer">
+            <a 
+              href="https://www.facebook.com/teoflyphotography" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-yellow-500 dark:bg-yellow-400 rounded-full flex items-center justify-center hover:bg-yellow-600 dark:hover:bg-yellow-500 transition-colors cursor-pointer"
+              aria-label="Follow us on Facebook"
+            >
               <span className="text-black font-bold"><Facebook className="w-6 h-6" /></span>
-            </div>
-            <div className="w-10 h-10 bg-yellow-500 dark:bg-yellow-400 rounded-full flex items-center justify-center hover:bg-yellow-600 dark:hover:bg-yellow-500 transition-colors cursor-pointer">
+            </a>
+            <a 
+              href="https://www.instagram.com/teofls/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-yellow-500 dark:bg-yellow-400 rounded-full flex items-center justify-center hover:bg-yellow-600 dark:hover:bg-yellow-500 transition-colors cursor-pointer"
+              aria-label="Follow us on Instagram"
+            >
               <span className="text-black font-bold"><InstagramIcon className="w-6 h-6" /></span>
-            </div>
-            <div className="w-10 h-10 bg-yellow-500 dark:bg-yellow-400 rounded-full flex items-center justify-center hover:bg-yellow-600 dark:hover:bg-yellow-500 transition-colors cursor-pointer">
+            </a>
+            <a 
+              href="https://www.tiktok.com/@teoflyphotography" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-yellow-500 dark:bg-yellow-400 rounded-full flex items-center justify-center hover:bg-yellow-600 dark:hover:bg-yellow-500 transition-colors cursor-pointer"
+              aria-label="Follow us on TikTok"
+            >
               <span className="text-black font-bold"><FaTiktok className="w-6 h-6" /></span>
-            </div>
+            </a>
           </div>
         </div>
 
                  {/* CTA Button */}
          <div className="px-6 py-4 flex-shrink-0">
+          <a href="#contact">
           <Button className="w-full bg-yellow-500 dark:bg-yellow-400 text-black hover:bg-yellow-600 dark:hover:bg-yellow-500 font-semibold py-3" onClick={onToggle}>
             GET IN TOUCH
           </Button>
+          </a>
         </div>
       </div>
     </>

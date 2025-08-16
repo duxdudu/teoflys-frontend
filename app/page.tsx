@@ -101,9 +101,9 @@ export default function Home() {
       title: "Sarah & John's Wedding",
       category: "Wedding Photography",
       description: "A beautiful outdoor wedding celebration filled with love, laughter, and unforgettable moments. Captured every detail from the intimate ceremony to the lively reception.",
-      stats: "WEDDING • 250 PHOTOS • COMPLETED",
-      coverImage: "/1.jpg",
-      images: ["/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/6.jpg", "/7.jpg", "/8.jpg"],
+      stats: "WEDDING • 8 PHOTOS • COMPLETED",
+      coverImage: "/wedding1.jpg",
+      images: ["/wedding1.jpg", "/wedding2.jpg", "/wedding3.jpg", "/wedding4.jpg", "/wedding5.jpg", "/wedding6.jpg", "/wedding7.jpg", "/wedding8.jpg"],
       client: "Sarah & John",
       date: "June 2024"
     },
@@ -112,20 +112,20 @@ export default function Home() {
       title: "Emma's Professional Portraits",
       category: "Portrait Photography",
       description: "Professional headshots and personal branding photography for a successful entrepreneur. Clean, modern style that captures personality and professionalism.",
-      stats: "PORTRAIT • 45 PHOTOS • COMPLETED",
-      coverImage: "/2.jpg",
-      images: ["/2.jpg", "/3.jpg", "/4.jpg", "/5.jpg", "/1.jpg"],
+      stats: "PORTRAIT • 8 PHOTOS • COMPLETED",
+      coverImage: "/portrait.jpg",
+      images: ["/portrait.jpg", "/portrait2.jpg", "/portrait3.jpg", "/portrait4.jpg", "/portrait5.jpg", "/portrait6.jpg", "/portrait7.jpg", "/portrait8.jpg"],
       client: "Emma Rodriguez",
       date: "May 2024"
     },
     {
       id: "commercial-restaurant",
-      title: "Bella Vista Restaurant",
+      title: "Nyandungu Restaurant",
       category: "Commercial Photography",
       description: "Complete restaurant photography including interior shots, food styling, and team portraits. Created a comprehensive visual brand package for marketing materials.",
-      stats: "COMMERCIAL • 120 PHOTOS • COMPLETED",
-      coverImage: "/6.jpg",
-      images: ["/6.jpg", "/7.jpg", "/8.jpg", "/1.jpg", "/2.jpg", "/3.jpg"],
+      stats: "COMMERCIAL • 9 PHOTOS • COMPLETED",
+      coverImage: "/commercial1.jpg",
+      images: ["/commercial1.jpg", "/commercial2.jpg", "/commercial3.jpg", "/commercial4.jpg", "/commercial5.jpg", "/commercial6.jpg", "/commercial7.jpg", "/commercial8.jpg"],
       client: "Bella Vista Restaurant",
       date: "April 2024"
     },
@@ -134,7 +134,7 @@ export default function Home() {
       title: "Tech Innovation Summit 2024",
       category: "Event Photography",
       description: "Corporate event coverage including keynote speakers, networking sessions, and product demonstrations. Professional documentation of a major industry conference.",
-      stats: "EVENT • 180 PHOTOS • COMPLETED",
+      stats: "EVENT • 11 PHOTOS • COMPLETED",
       coverImage: "/4.jpg",
       images: ["/4.jpg", "/5.jpg", "/6.jpg", "/7.jpg", "/8.jpg"],
       client: "Tech Innovations Inc.",
@@ -145,7 +145,7 @@ export default function Home() {
       title: "Rwanda Mountain Landscapes",
       category: "Landscape Photography",
       description: "Breathtaking landscape photography showcasing Rwanda's natural beauty. Captured during golden hour and blue hour for optimal lighting conditions.",
-      stats: "LANDSCAPE • 30 PHOTOS • COMPLETED",
+      stats: "LANDSCAPE • 10 PHOTOS • COMPLETED",
       coverImage: "/7.jpg",
       images: ["/7.jpg", "/8.jpg", "/1.jpg", "/2.jpg"],
       client: "Personal Project",
@@ -156,7 +156,7 @@ export default function Home() {
       title: "Artisan Café Menu Photography",
       category: "Food Photography",
       description: "Styled food photography for a local café's new menu. Each dish carefully arranged and lit to showcase texture, color, and appetizing presentation.",
-      stats: "FOOD • 85 PHOTOS • COMPLETED",
+      stats: "FOOD • 8 PHOTOS • COMPLETED",
       coverImage: "/8.jpg",
       images: ["/8.jpg", "/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg"],
       client: "Artisan Café",
@@ -574,28 +574,34 @@ This message was sent from the Teoflys Photography website contact form.
                 </h3>
                 <div className="">
                   <div className="flex flex-row items-center justify-between w-full space-x-2 sm:space-x-4 md:space-x-6">
-                    <div className="flex-1 flex flex-col items-center gap-1 text-center min-w-0">
+                    <a 
+                      href="mailto:theonyn11@gmail.com"
+                      className="flex-1 flex flex-col items-center gap-1 text-center min-w-0 hover:scale-105 transition-transform duration-300"
+                    >
                       <div className="flex items-center gap-1 sm:gap-2">
                         <Mail className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-yellow-500 dark:text-yellow-400 flex-shrink-0" />
                         <span className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm">
                           Email
                         </span>
                       </div>
-                      <span className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm md:text-base truncate">
-                        helloteofly@gmail.com
+                      <span className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm md:text-base truncate hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors">
+                        theonyn11@gmail.com
                       </span>
-                    </div>
-                    <div className="flex-1 flex flex-col items-center gap-1 text-center min-w-0">
+                    </a>
+                    <a 
+                      href="tel:+212620487204"
+                      className="flex-1 flex flex-col items-center gap-1 text-center min-w-0 hover:scale-105 transition-transform duration-300"
+                    >
                       <div className="flex items-center gap-1 sm:gap-2">
                         <Phone className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-yellow-500 dark:text-yellow-400 flex-shrink-0" />
                         <span className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm">
                           Phone
                         </span>
                       </div>
-                      <span className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm md:text-base truncate">
-                        +1 (555) 123-4567
+                      <span className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm md:text-base truncate hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors">
+                        +212 620-487204
                       </span>
-                    </div>
+                    </a>
                     <div className="flex-1 flex flex-col items-center gap-1 text-center min-w-0">
                       <div className="flex items-center gap-1 sm:gap-2">
                         <MapPin className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-yellow-500 dark:text-yellow-400 flex-shrink-0" />
@@ -612,50 +618,56 @@ This message was sent from the Teoflys Photography website contact form.
                     {/* Social Icons */}
                     <div className="flex gap-3 sm:gap-4 bg-yellow-500 dark:bg-yellow-400 opacity-80 w-full sm:w-auto p-3 sm:p-3 rounded-full justify-center transition-all duration-300 hover:scale-105">
                       <a
-                        href="https://facebook.com"
+                        href="https://www.facebook.com/teoflyphotography"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black p-2 rounded-full transition-all duration-300 hover:scale-110 hover:bg-blue-600"
+                        aria-label="Follow us on Facebook"
                       >
                         <FaFacebook className="text-white w-5 h-5 sm:w-6 sm:h-6" />
                       </a>
                       <a
-                        href="https://tiktok.com"
+                        href="https://www.tiktok.com/@teoflyphotography"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black p-2 rounded-full transition-all duration-300 hover:scale-110 hover:bg-pink-600"
+                        aria-label="Follow us on TikTok"
                       >
                         <SiTiktok className="text-white w-5 h-5 sm:w-6 sm:h-6" />
                       </a>
                       <a
-                        href="https://linkedin.com"
+                        href="https://www.linkedin.com/company/teoflyphotography"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black p-2 rounded-full transition-all duration-300 hover:scale-110 hover:bg-blue-700"
+                        aria-label="Follow us on LinkedIn"
                       >
                         <FaLinkedin className="text-white w-5 h-5 sm:w-6 sm:h-6" />
                       </a>
                       <a
-                        href="https://instagram.com"
+                        href="https://www.instagram.com/teoflyphotography"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black p-2 rounded-full transition-all duration-300 hover:scale-110 hover:bg-pink-500"
+                        aria-label="Follow us on Instagram"
                       >
                         <InstagramIcon className="text-white w-5 h-5 sm:w-6 sm:h-6" />
                       </a>
                       <a
-                        href="https://snapchat.com"
+                        href="https://www.snapchat.com/add/teoflyphotography"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black p-2 rounded-full transition-all duration-300 hover:scale-110 hover:bg-yellow-400"
+                        aria-label="Follow us on Snapchat"
                       >
                         <BsSnapchat className="text-white w-5 h-5 sm:w-6 sm:h-6" />
                       </a>
                       <a
-                        href="https://youtube.com"
+                        href="https://www.youtube.com/@teoflyphotography"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black p-2 rounded-full transition-all duration-300 hover:scale-110 hover:bg-red-600"
+                        aria-label="Follow us on YouTube"
                       >
                         <YoutubeIcon className="text-white w-5 h-5 sm:w-6 sm:h-6" />
                       </a>
@@ -963,7 +975,8 @@ This message was sent from the Teoflys Photography website contact form.
                   <Image
                     src={project.coverImage}
                     alt={project.title}
-                    fill
+                    width={600}
+                    height={600}
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
@@ -1013,40 +1026,41 @@ This message was sent from the Teoflys Photography website contact form.
 
         {/* Project Dialog */}
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-            <div className="relative w-full max-w-6xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-2xl">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 lg:p-6 bg-black/80 backdrop-blur-sm">
+            <div className="relative w-full max-w-6xl lg:max-w-5xl xl:max-w-6xl max-h-[95vh] sm:max-h-[90vh] lg:max-h-[95vh] bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl overflow-hidden shadow-2xl mx-2">
               {/* Header */}
-              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="flex items-center justify-between p-3 sm:p-4 lg:p-5 border-b border-gray-200 dark:border-gray-700">
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg sm:text-xl lg:text-xl font-bold text-gray-900 dark:text-white truncate">
                     {selectedProject.title}
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-xs sm:text-sm lg:text-sm text-gray-500 dark:text-gray-400 truncate">
                     {selectedProject.client} • {selectedProject.date}
                   </p>
                 </div>
                 <button
                   onClick={closeProjectDialog}
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+                  className="flex-shrink-0 p-1.5 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors ml-2"
                 >
                   <span className="sr-only">Close</span>
-                  <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
               {/* Content */}
-              <div className="grid lg:grid-cols-3 gap-6 p-4 sm:p-6 max-h-[calc(90vh-140px)] overflow-y-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-5 p-3 sm:p-4 lg:p-5 max-h-[calc(95vh-80px)] sm:max-h-[calc(90vh-140px)] lg:max-h-[calc(85vh-120px)] overflow-y-auto">
                 {/* Main Image */}
-                <div className="lg:col-span-2">
-                  <div className="relative aspect-[16/10] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+                <div className="lg:col-span-2 order-1 lg:order-1">
+                  <div className="relative aspect-[2/3] sm:aspect-[4/3] lg:aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
                     <Image
                       src={selectedProject.images[projectImageIndex]}
                       alt={`${selectedProject.title} - Image ${projectImageIndex + 1}`}
-                      width={800}
-                      height={500}
+                      width={400}
+                      height={200}
                       className="w-full h-full object-cover"
+                      priority
                     />
                     
                     {/* Navigation Arrows */}
@@ -1054,33 +1068,33 @@ This message was sent from the Teoflys Photography website contact form.
                       <>
                         <button
                           onClick={prevProjectImage}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300"
+                          className="absolute left-2 sm:left-4 lg:left-4 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 lg:p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300"
                         >
-                          <ChevronLeft className="w-5 h-5" />
+                          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                         </button>
                         <button
                           onClick={nextProjectImage}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300"
+                          className="absolute right-2 sm:right-4 lg:right-4 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 lg:p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300"
                         >
-                          <ChevronRight className="w-5 h-5" />
+                          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                         </button>
                       </>
                     )}
 
                     {/* Image Counter */}
-                    <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                    <div className="absolute bottom-2 sm:bottom-4 lg:bottom-4 right-2 sm:right-4 lg:right-4 bg-black/50 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
                       {projectImageIndex + 1} / {selectedProject.images.length}
                     </div>
                   </div>
 
                   {/* Thumbnail Navigation */}
                   {selectedProject.images.length > 1 && (
-                    <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
+                    <div className="flex gap-1.5 sm:gap-2 lg:gap-2 mt-3 sm:mt-4 lg:mt-4 overflow-x-auto pb-2 scrollbar-hide">
                       {selectedProject.images.map((image, index) => (
                         <button
                           key={index}
                           onClick={() => setProjectImageIndex(index)}
-                          className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                          className={`flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-14 lg:h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
                             index === projectImageIndex
                               ? 'border-yellow-500 opacity-100'
                               : 'border-gray-300 dark:border-gray-600 opacity-60 hover:opacity-80'
@@ -1100,55 +1114,55 @@ This message was sent from the Teoflys Photography website contact form.
                 </div>
 
                 {/* Project Details */}
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6 lg:space-y-5 order-2 lg:order-2">
                   <div>
-                    <Badge className="bg-yellow-500 text-black mb-3">
+                    <Badge className="bg-yellow-500 text-black mb-2 sm:mb-3 lg:mb-3 text-xs sm:text-sm">
                       {selectedProject.category}
                     </Badge>
-                    <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-2">
+                    <h4 className="font-bold text-base sm:text-lg lg:text-lg text-gray-900 dark:text-white mb-2">
                       Project Details
                     </h4>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm lg:text-sm leading-relaxed">
                       {selectedProject.description}
                     </p>
                   </div>
 
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                        <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <div className="space-y-2.5 sm:space-y-3 lg:space-y-3">
+                    <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-3">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600 dark:text-blue-400" />
                       </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">Date</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{selectedProject.date}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
-                        <Camera className="w-4 h-4 text-green-600 dark:text-green-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">Photos</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{selectedProject.images.length} images</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs sm:text-sm lg:text-sm font-medium text-gray-900 dark:text-white">Date</p>
+                        <p className="text-xs sm:text-sm lg:text-sm text-gray-500 dark:text-gray-400 truncate">{selectedProject.date}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
-                        <span className="text-purple-600 dark:text-purple-400 text-sm font-bold">C</span>
+                    <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-3">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Camera className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 dark:text-green-400" />
                       </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">Client</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{selectedProject.client}</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs sm:text-sm lg:text-sm font-medium text-gray-900 dark:text-white">Photos</p>
+                        <p className="text-xs sm:text-sm lg:text-sm text-gray-500 dark:text-gray-400">{selectedProject.images.length} images</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-3">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                        <span className="text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-bold">C</span>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs sm:text-sm lg:text-sm font-medium text-gray-900 dark:text-white">Client</p>
+                        <p className="text-xs sm:text-sm lg:text-sm text-gray-500 dark:text-gray-400 truncate">{selectedProject.client}</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="pt-3 sm:pt-4 lg:pt-4 border-t border-gray-200 dark:border-gray-700">
                     <Button
                       onClick={closeProjectDialog}
-                      className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded-lg transition-all duration-300"
+                      className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded-lg transition-all duration-300 text-sm sm:text-base"
                     >
                       Close Gallery
                     </Button>
@@ -2156,31 +2170,37 @@ This message was sent from the Teoflys Photography website contact form.
             <div className="space-y-4">
               <h4 className="font-bold text-gray-900 dark:text-white text-lg sm:text-xl mb-4">GET IN TOUCH</h4>
               <div className="space-y-3">
-                <div className="flex items-center gap-3 group">
+                <a 
+                  href="mailto:theonyn11@gmail.com"
+                  className="flex items-center gap-3 group hover:scale-105 transition-transform duration-300"
+                >
                   <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Mail className="w-4 h-4 text-white" />
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 dark:text-gray-400">Email</p>
-                    <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-medium">teofly@gmail.com</p>
+                    <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-medium hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors">theonyn11@gmail.com</p>
                   </div>
-                </div>
-                <div className="flex items-center gap-3 group">
+                </a>
+                <a 
+                  href="tel:+212620487204"
+                  className="flex items-center gap-3 group hover:scale-105 transition-transform duration-300"
+                >
                   <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Phone className="w-4 h-4 text-white" />
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 dark:text-gray-400">Phone</p>
-                    <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-medium">+1 (555) 123-4567</p>
+                    <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-medium hover:text-yellow-500 dark:hover:text-yellow-400 transition-colors">+212 620-487204</p>
                   </div>
-                </div>
+                </a>
                 <div className="flex items-center gap-3 group">
                   <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <MapPin className="w-4 h-4 text-white" />
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 dark:text-gray-400">Location</p>
-                    <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-medium">Marroco , Rabat</p>
+                    <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-medium">Marroco, Rabat</p>
                   </div>
                 </div>
               </div>
@@ -2197,7 +2217,8 @@ This message was sent from the Teoflys Photography website contact form.
                     color: 'from-blue-600 to-blue-700',
                     bgColor: 'bg-blue-50 dark:bg-blue-900/20',
                     borderColor: 'border-blue-200 dark:border-blue-800',
-                    textColor: 'text-blue-600 dark:text-blue-400'
+                    textColor: 'text-blue-600 dark:text-blue-400',
+                    url: 'https://www.facebook.com/teoflyphotography'
                   },
                   { 
                     icon: SiTiktok, 
@@ -2205,7 +2226,8 @@ This message was sent from the Teoflys Photography website contact form.
                     color: 'from-pink-500 to-purple-600',
                     bgColor: 'bg-pink-50 dark:bg-pink-900/20',
                     borderColor: 'border-pink-200 dark:border-pink-800',
-                    textColor: 'text-pink-600 dark:text-pink-400'
+                    textColor: 'text-pink-600 dark:text-pink-400',
+                    url: 'https://www.tiktok.com/@teoflyphotography'
                   },
                   { 
                     icon: FaLinkedin, 
@@ -2213,7 +2235,8 @@ This message was sent from the Teoflys Photography website contact form.
                     color: 'from-blue-700 to-blue-800',
                     bgColor: 'bg-blue-50 dark:bg-blue-900/20',
                     borderColor: 'border-blue-200 dark:border-blue-800',
-                    textColor: 'text-blue-600 dark:text-blue-400'
+                    textColor: 'text-blue-600 dark:text-blue-400',
+                    url: 'https://www.linkedin.com/company/teoflyphotography'
                   },
                   { 
                     icon: InstagramIcon, 
@@ -2221,7 +2244,8 @@ This message was sent from the Teoflys Photography website contact form.
                     color: 'from-pink-500 to-purple-500',
                     bgColor: 'bg-purple-50 dark:bg-purple-900/20',
                     borderColor: 'border-purple-200 dark:border-purple-800',
-                    textColor: 'text-purple-600 dark:text-purple-400'
+                    textColor: 'text-purple-600 dark:text-purple-400',
+                    url: 'https://www.instagram.com/teoflyphotography'
                   },
                   { 
                     icon: BsSnapchat, 
@@ -2229,7 +2253,8 @@ This message was sent from the Teoflys Photography website contact form.
                     color: 'from-yellow-400 to-orange-500',
                     bgColor: 'bg-yellow-50 dark:bg-yellow-900/20',
                     borderColor: 'border-yellow-200 dark:border-yellow-800',
-                    textColor: 'text-yellow-600 dark:text-yellow-400'
+                    textColor: 'text-yellow-600 dark:text-yellow-400',
+                    url: 'https://www.snapchat.com/add/teoflyphotography'
                   },
                   { 
                     icon: YoutubeIcon, 
@@ -2237,13 +2262,17 @@ This message was sent from the Teoflys Photography website contact form.
                     color: 'from-red-600 to-red-700',
                     bgColor: 'bg-red-50 dark:bg-red-900/20',
                     borderColor: 'border-red-200 dark:border-red-800',
-                    textColor: 'text-red-600 dark:text-red-400'
+                    textColor: 'text-red-600 dark:text-red-400',
+                    url: 'https://www.youtube.com/@teoflyphotography'
                   }
                 ].map((social) => (
                   <a
                     key={social.name}
-                    href="#"
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={`group relative overflow-hidden ${social.bgColor} border ${social.borderColor} rounded-lg p-2 sm:p-3 hover:shadow-md transition-all duration-300 hover:scale-105 hover:-translate-y-1`}
+                    aria-label={`Follow us on ${social.name}`}
                   >
                     {/* Gradient Overlay on Hover */}
                     <div className={`absolute inset-0 bg-gradient-to-r ${social.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>

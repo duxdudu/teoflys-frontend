@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Star, CheckCircle, XCircle, Eye, Trash2, BarChart3, MessageCircle, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import axios from "axios";
+import api from "@/lib/utils/axios-config";
 import TestimonialsAnalytics from "@/app/components/TestimonialsAnalytics";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
@@ -126,7 +126,7 @@ export default function AdminTestimonials() {
       }
 
       const token = localStorage.getItem('accessToken');
-      const response = await axios.get<TestimonialsResponse>(`/api/testimonials/admin/all?${params}` , {
+      const response = await api.get<TestimonialsResponse>(`/testimonials/admin/all?${params}` , {
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
       });
       
@@ -145,7 +145,7 @@ export default function AdminTestimonials() {
   const fetchStats = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const response = await axios.get('/api/testimonials/admin/stats', {
+      const response = await api.get('/testimonials/admin/stats', {
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
       });
       setStats(response.data);
@@ -213,9 +213,18 @@ export default function AdminTestimonials() {
         }
 
         const token = localStorage.getItem('accessToken');
-        await axios.put(`/api/testimonials/admin/approve/${selectedTestimonial._id}`, updateData, {
-          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-        });
+        
+        // Use the correct endpoint based on action
+        if (action === 'reject') {
+          await api.put(`/testimonials/admin/reject/${selectedTestimonial._id}`, updateData, {
+            headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+          });
+        } else {
+          // For approve and publish, use the approve endpoint
+          await api.put(`/testimonials/admin/approve/${selectedTestimonial._id}`, updateData, {
+            headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+          });
+        }
         
         // Update local state
         setTestimonials(prev => prev.map(t => 
@@ -232,7 +241,7 @@ export default function AdminTestimonials() {
       
     } catch (error: unknown) {
       console.error(`Error ${action}ing testimonial:`, error);
-      const errorMessage = axios.isAxiosError(error) ? error.response?.data?.error : 'Unknown error';
+      const errorMessage = error && typeof error === 'object' && 'response' in error && error.response && typeof error.response === 'object' && 'data' in error.response && error.response.data && typeof error.response.data === 'object' && 'error' in error.response.data ? error.response.data.error : 'Unknown error';
       alert(`Failed to ${action} testimonial: ${errorMessage}`);
     } finally {
       setActionLoading(null);
@@ -281,7 +290,7 @@ export default function AdminTestimonials() {
     setActionLoading('delete');
     try {
               const token = localStorage.getItem('accessToken');
-        await axios.delete(`/api/testimonials/admin/${pendingDeleteId}`, {
+        await api.delete(`/testimonials/admin/${pendingDeleteId}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
       setTestimonials(prev => prev.filter(t => t._id !== pendingDeleteId));
@@ -290,7 +299,8 @@ export default function AdminTestimonials() {
       closeModal();
     } catch (error) {
       console.error('Error deleting testimonial:', error);
-      alert(`Failed to delete testimonial: ${axios.isAxiosError(error) ? error.response?.data?.error : 'Unknown error'}`);
+      const errorMessage = error && typeof error === 'object' && 'response' in error && error.response && typeof error.response === 'object' && 'data' in error.response && error.response.data && typeof error.response.data === 'object' && 'error' in error.response.data ? error.response.data.error : 'Unknown error';
+      alert(`Failed to delete testimonial: ${errorMessage}`);
     } finally {
       setActionLoading(null);
       setPendingDeleteId(null);
@@ -372,51 +382,51 @@ export default function AdminTestimonials() {
 
         {/* Stats Cards */}
         {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <Card className="bg-white/5 border-white/10">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-400">Total</p>
-                    <p className="text-2xl font-bold">{stats.total}</p>
+                    <p className="text-xs sm:text-sm text-gray-400">Total</p>
+                    <p className="text-lg sm:text-2xl font-bold">{stats.total}</p>
                   </div>
-                  <MessageCircle className="w-8 h-8 text-blue-400" />
+                  <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
                 </div>
               </CardContent>
             </Card>
             
             <Card className="bg-white/5 border-white/10">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-400">Pending</p>
-                    <p className="text-2xl font-bold text-yellow-400">{stats.pending}</p>
+                    <p className="text-xs sm:text-sm text-gray-400">Pending</p>
+                    <p className="text-lg sm:text-2xl font-bold text-yellow-400">{stats.pending}</p>
                   </div>
-                  <BarChart3 className="w-8 h-8 text-yellow-400" />
+                  <BarChart3 className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
                 </div>
               </CardContent>
             </Card>
             
             <Card className="bg-white/5 border-white/10">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-400">Approved</p>
-                    <p className="text-2xl font-bold text-blue-400">{stats.approved}</p>
+                    <p className="text-xs sm:text-sm text-gray-400">Approved</p>
+                    <p className="text-lg sm:text-2xl font-bold text-blue-400">{stats.approved}</p>
                   </div>
-                  <CheckCircle className="w-8 h-8 text-blue-400" />
+                  <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
                 </div>
               </CardContent>
             </Card>
             
             <Card className="bg-white/5 border-white/10">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-400">Published</p>
-                    <p className="text-2xl font-bold text-green-400">{stats.published}</p>
+                    <p className="text-xs sm:text-sm text-gray-400">Published</p>
+                    <p className="text-lg sm:text-2xl font-bold text-green-400">{stats.published}</p>
                   </div>
-                  <CheckCircle className="w-8 h-8 text-green-400" />
+                  <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-green-400" />
                 </div>
               </CardContent>
             </Card>
@@ -424,20 +434,20 @@ export default function AdminTestimonials() {
         )}
 
         {/* Enhanced Analytics Dashboard */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <TestimonialsAnalytics />
         </div>
 
         {/* Filters */}
-        <Card className="bg-white border border-gray-200 dark:bg-white/5 dark:border-white/10 mb-6">
-          <CardContent className="p-6">
-            <div className="flex flex-wrap gap-4">
-              <div>
+        <Card className="bg-white border border-gray-200 dark:bg-white/5 dark:border-white/10 mb-4 sm:mb-6">
+          <CardContent className="p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
                 <select
                   value={selectedStatus}
                   onChange={(e) => handleStatusChange(e.target.value)}
-                  className="px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white text-gray-900 border border-gray-300 dark:bg-white/10 dark:text-white dark:border-white/20"
+                  className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white text-gray-900 border border-gray-300 dark:bg-white/10 dark:text-white dark:border-white/20"
                 >
                   {statusOptions.map((status) => (
                     <option key={status.value} value={status.value} className="bg-white text-gray-900 dark:bg-gray-800 dark:text-white">
@@ -447,12 +457,12 @@ export default function AdminTestimonials() {
                 </select>
               </div>
               
-              <div>
+              <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
                 <select
                   value={selectedCategory}
                   onChange={(e) => handleCategoryChange(e.target.value)}
-                  className="px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white text-gray-900 border border-gray-300 dark:bg-white/10 dark:text-white dark:border-white/20"
+                  className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white text-gray-900 border border-gray-300 dark:bg-white/10 dark:text-white dark:border-white/20"
                 >
                   {categories.map((category) => (
                     <option key={category.value} value={category.value} className="bg-white text-gray-900 dark:bg-gray-800 dark:text-white">
@@ -489,15 +499,17 @@ export default function AdminTestimonials() {
             <div className="space-y-4 mb-6">
               {testimonials.map((testimonial) => (
                 <Card key={testimonial._id} className="bg-white border border-gray-200 dark:bg-white/5 dark:border-white/10">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-semibold text-lg text-gray-900 dark:text-white">{testimonial.name}</h3>
-                          {getStatusBadge(testimonial)}
-                          <Badge className={`${categoryColors[testimonial.category]} border`}>
-                            {categoryLabels[testimonial.category]}
-                          </Badge>
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
+                          <h3 className="font-semibold text-lg text-gray-900 dark:text-white truncate">{testimonial.name}</h3>
+                          <div className="flex flex-wrap gap-2">
+                            {getStatusBadge(testimonial)}
+                            <Badge className={`${categoryColors[testimonial.category]} border text-xs`}>
+                              {categoryLabels[testimonial.category]}
+                            </Badge>
+                          </div>
                         </div>
                         
                         <div className="flex items-center gap-2 mb-2">
@@ -507,9 +519,9 @@ export default function AdminTestimonials() {
                           </span>
                         </div>
                         
-                        <p className="text-gray-700 dark:text-gray-300 mb-2">&ldquo;{testimonial.message}&rdquo;</p>
+                        <p className="text-gray-700 dark:text-gray-300 mb-2 text-sm sm:text-base line-clamp-3">&ldquo;{testimonial.message}&rdquo;</p>
                         
-                        <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-gray-600 dark:text-gray-400">
                           <span className="truncate">{testimonial.email}</span>
                           <span className="whitespace-nowrap">{formatDate(testimonial.createdAt)}</span>
                         </div>
@@ -523,15 +535,16 @@ export default function AdminTestimonials() {
                         )}
                       </div>
                       
-                      <div className="flex flex-col gap-2 ml-4">
+                      <div className="flex flex-row sm:flex-col gap-2 sm:ml-4">
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={() => openModal(testimonial)}
-                          className="border-gray-300 text-gray-700 hover:bg-gray-50 dark:bg-white/10 dark:hover:bg_white/20 dark:text-white dark:border-white/20"
+                          className="border-gray-300 text-gray-700 hover:bg-gray-50 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:border-white/20 flex-1 sm:flex-none"
                         >
                           <Eye className="w-4 h-4 mr-1" />
-                          Review
+                          <span className="hidden sm:inline">Review</span>
+                          <span className="sm:hidden">View</span>
                         </Button>
                         <Button
                           size="sm"
@@ -541,10 +554,11 @@ export default function AdminTestimonials() {
                             setPendingDeleteId(testimonial._id);
                             setConfirmOpen(true);
                           }}
-                          className="border-red-300 text-red-700 hover:bg-red-50 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:border-white/20"
+                          className="border-red-300 text-red-700 hover:bg-red-50 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:border-white/20 flex-1 sm:flex-none"
                         >
                           <Trash2 className="w-4 h-4 mr-1" />
-                          Delete
+                          <span className="hidden sm:inline">Delete</span>
+                          <span className="sm:hidden">Del</span>
                         </Button>
                       </div>
                     </div>
@@ -555,27 +569,30 @@ export default function AdminTestimonials() {
 
             {/* Pagination */}
             {pagination.totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-2 mt-6">
                 <Button
                   variant="outline"
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={!pagination.hasPrev}
-                  className="bg-white/10 hover:bg-white/20 text-white border-white/20"
+                  className="bg-white/10 hover:bg-white/20 text-white border-white/20 px-3 sm:px-4 py-2 text-sm"
                 >
-                  Previous
+                  <span className="hidden sm:inline">Previous</span>
+                  <span className="sm:hidden">Prev</span>
                 </Button>
                 
-                <span className="text-gray-400">
-                  Page {currentPage} of {pagination.totalPages}
+                <span className="text-gray-400 text-sm px-2 sm:px-4">
+                  <span className="hidden sm:inline">Page {currentPage} of {pagination.totalPages}</span>
+                  <span className="sm:hidden">{currentPage}/{pagination.totalPages}</span>
                 </span>
                 
                 <Button
                   variant="outline"
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={!pagination.hasNext}
-                  className="bg-white/10 hover:bg-white/20 text-white border-white/20"
+                  className="bg-white/10 hover:bg-white/20 text-white border-white/20 px-3 sm:px-4 py-2 text-sm"
                 >
-                  Next
+                  <span className="hidden sm:inline">Next</span>
+                  <span className="sm:hidden">Next</span>
                 </Button>
               </div>
             )}
@@ -585,57 +602,58 @@ export default function AdminTestimonials() {
 
       {/* Review Modal */}
       {showModal && selectedTestimonial && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <Card className="w-full max-w-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-white/20">
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-4 z-50">
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-white/20">
+            <CardHeader className="sticky top-0 bg-white dark:bg-gray-800 z-10 border-b border-gray-200 dark:border-white/10">
+              <CardTitle className="flex items-center justify-between text-lg sm:text-xl">
                 <span className="text-gray-900 dark:text-white">Review Testimonial</span>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={closeModal}
-                  className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                  className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white p-2"
                 >
                   ✕
                 </Button>
               </CardTitle>
             </CardHeader>
             
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-4 sm:p-6">
               <div>
-                <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">{selectedTestimonial.name}</h3>
-                <p className="text-gray-700 dark:text-gray-300 text-sm mb-2">{selectedTestimonial.email}</p>
+                <h3 className="font-semibold mb-2 text-gray-900 dark:text-white text-base sm:text-lg">{selectedTestimonial.name}</h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm mb-2 break-all">{selectedTestimonial.email}</p>
                 <div className="flex items-center gap-2 mb-2">
                   {renderStars(selectedTestimonial.rating)}
                   <span className="text-sm text-gray-400">
                     {selectedTestimonial.rating}/5
                   </span>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">&ldquo;{selectedTestimonial.message}&rdquo;</p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">&ldquo;{selectedTestimonial.message}&rdquo;</p>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Admin Notes (Optional)
                 </label>
                 <Textarea
                   value={adminNotes}
                   onChange={(e) => setAdminNotes(e.target.value)}
                   placeholder="Add any notes about this testimonial..."
-                  className="bg-white border border-gray-300 text-gray-900 placeholder-gray-400 dark:bg-white/10 dark:border-white/20 dark:text-white"
+                  className="bg-white border border-gray-300 text-gray-900 placeholder-gray-400 dark:bg-white/10 dark:border-white/20 dark:text-white resize-none"
                   rows={3}
                 />
               </div>
               
-              <div className="flex gap-3 pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 {!selectedTestimonial.isApproved && (
                   <Button
                     onClick={() => handleAction('approve')}
                     disabled={actionLoading !== null}
-                    className="bg-green-600 hover:bg-green-700 text-white flex-1"
+                    className="bg-green-600 hover:bg-green-700 text-white flex-1 sm:flex-none"
                   >
                     <CheckCircle className="w-4 h-4 mr-2" />
-                    Approve
+                    <span className="hidden sm:inline">Approve</span>
+                    <span className="sm:hidden">Approve</span>
                   </Button>
                 )}
                 
@@ -643,10 +661,11 @@ export default function AdminTestimonials() {
                   <Button
                     onClick={() => handleAction('publish')}
                     disabled={actionLoading !== null}
-                    className="bg-blue-600 hover:bg-blue-700 text-white flex-1"
+                    className="bg-blue-600 hover:bg-blue-700 text-white flex-1 sm:flex-none"
                   >
                     <CheckCircle className="w-4 h-4 mr-2" />
-                    Publish
+                    <span className="hidden sm:inline">Publish</span>
+                    <span className="sm:hidden">Publish</span>
                   </Button>
                 )}
                 
@@ -654,20 +673,22 @@ export default function AdminTestimonials() {
                   <Button
                     onClick={() => handleAction('reject')}
                     disabled={actionLoading !== null}
-                    className="bg-yellow-600 hover:bg-yellow-700 text-white flex-1"
+                    className="bg-yellow-600 hover:bg-yellow-700 text-white flex-1 sm:flex-none"
                   >
                     <XCircle className="w-4 h-4 mr-2" />
-                    Reject
+                    <span className="hidden sm:inline">Reject</span>
+                    <span className="sm:hidden">Reject</span>
                   </Button>
                 )}
                 
                 <Button
                   onClick={() => handleAction('delete')}
                   disabled={actionLoading !== null}
-                  className="bg-red-600 hover:bg-red-700 text-white flex-1"
+                  className="bg-red-600 hover:bg-red-700 text-white flex-1 sm:flex-none"
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
-                  Delete
+                  <span className="hidden sm:inline">Delete</span>
+                  <span className="sm:hidden">Delete</span>
                 </Button>
               </div>
             </CardContent>
@@ -677,3 +698,4 @@ export default function AdminTestimonials() {
     </div>
   );
 }
+ 

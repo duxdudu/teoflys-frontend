@@ -266,7 +266,7 @@ export default function AdminDashboard() {
               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <ImageIcon className="w-3 h-3 sm:w-5 sm:h-5 text-white" />
               </div>
-              <h1 className="text-lg sm:text-xl font-bold text-gray-900">Gallery Admin</h1>
+              <h1 className="text-lg sm:text-xl font-bold text-gray-900"> Admin</h1>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
               <button
