@@ -136,7 +136,7 @@ export default function Home() {
       description: "Corporate event coverage including keynote speakers, networking sessions, and product demonstrations. Professional documentation of a major industry conference.",
       stats: "EVENT • 11 PHOTOS • COMPLETED",
       coverImage: "/4.jpg",
-      images: ["/4.jpg", "/5.jpg", "/6.jpg", "/7.jpg", "/8.jpg"],
+      images: ["/4.jpg", "/5.jpg", "/6.jpg", "/7.jpg", "/8.jpg","/Tech1.jpg", "/Tech2.jpg", "/Tech3.jpg"],
       client: "Tech Innovations Inc.",
       date: "March 2024"
     },
@@ -146,8 +146,8 @@ export default function Home() {
       category: "Landscape Photography",
       description: "Breathtaking landscape photography showcasing Rwanda's natural beauty. Captured during golden hour and blue hour for optimal lighting conditions.",
       stats: "LANDSCAPE • 10 PHOTOS • COMPLETED",
-      coverImage: "/7.jpg",
-      images: ["/7.jpg", "/8.jpg", "/1.jpg", "/2.jpg"],
+      coverImage: "/Landscapes1.jpg",
+      images: ["/Landscapes1.jpg", "/Landscapes2.jpg", "/Landscapes3.jpg", "/Landscapes4.jpg", "/Landscapes5.jpg", "/Landscapes6.jpg", "/Landscapes7.jpg", "/Landscapes8.jpg", "/Landscapes9.jpg", "/Landscapes10.jpg"],
       client: "Personal Project",
       date: "February 2024"
     },
@@ -156,9 +156,9 @@ export default function Home() {
       title: "Artisan Café Menu Photography",
       category: "Food Photography",
       description: "Styled food photography for a local café's new menu. Each dish carefully arranged and lit to showcase texture, color, and appetizing presentation.",
-      stats: "FOOD • 8 PHOTOS • COMPLETED",
-      coverImage: "/8.jpg",
-      images: ["/8.jpg", "/1.jpg", "/2.jpg", "/3.jpg", "/4.jpg"],
+      stats: "FOOD • 12 PHOTOS • COMPLETED",
+      coverImage: "/Artisan7.jpg",
+      images: ["/Artisan1.jpg", "/Artisan2.jpg", "/Artisan3.jpg", "/Artisan4.jpg", "/Artisan5.jpg", "/Artisan6.jpg", "/Artisan7.jpg", "/Artisan8.jpg","/Artisan9.jpg", "/Artisan10.jpg","/Artisan11.jpg", "/Artisan12.jpg"],
       client: "Artisan Café",
       date: "January 2024"
     }
@@ -480,17 +480,18 @@ This message was sent from the Teoflys Photography website contact form.
           {/* Category Tags - Enhanced Mobile Layout */}
           <div className="flex flex-wrap gap-2 sm:gap-3 px-6 mt-4">
             {[
-              { label: "FOOD PHOTOGRAPHY", show: "" },
-              { label: "COMMERCIAL", show: "" },
-              { label: "PRODUCT", show: "" },
-              { label: "WEDDING", show: "" },
-              { label: "LANDSCAPE", show: "hidden sm:inline-flex" },
-              { label: "ARCHITECTURAL", show: "hidden md:inline-flex" },
-              { label: "PORTRAIT", show: "hidden lg:inline-flex" },
+              { label: "FOOD PHOTOGRAPHY", show: "", link: "/services/food" },
+              { label: "COMMERCIAL", show: "", link: "/services/commercial" },
+              { label: "PRODUCT", show: "", link: "/services/commercial" },
+              { label: "WEDDING", show: "", link: "/services/wedding" },
+              { label: "LANDSCAPE", show: "", link: "/services/landscape" },
+              { label: "ARCHITECTURAL", show: "", link: "/services/architectural" },
+              { label: "PORTRAIT", show: "hidden lg:inline-flex", link: "/services/portrait" },
             ].map((item, index) => (
-              <div
+              <Link
                 key={item.label}
-                className={`border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-xs sm:text-sm px-6 py-1.5 rounded-full transition-all duration-300 ease-in-out hover:scale-105 hover:bg-yellow-100 dark:hover:bg-gray-700 shadow-sm ${item.show}`}
+                href={item.link}
+                className={`border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-xs sm:text-sm px-6 py-1.5 rounded-full transition-all duration-300 ease-in-out hover:scale-105 hover:bg-yellow-100 dark:hover:bg-gray-700 shadow-sm cursor-pointer ${item.show}`}
                 style={{
                   animation: `fadeInUp 0.5s ease ${(index + 1) * 0.1}s both`,
                   opacity: 0,
@@ -498,7 +499,7 @@ This message was sent from the Teoflys Photography website contact form.
                 }}
               >
                 {item.label}
-              </div>
+              </Link>
             ))}
 
             {/* Inline style tag for fadeInUp keyframes */}
@@ -1050,119 +1051,118 @@ This message was sent from the Teoflys Photography website contact form.
               </div>
 
               {/* Content */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-5 p-3 sm:p-4 lg:p-5 max-h-[calc(95vh-80px)] sm:max-h-[calc(90vh-140px)] lg:max-h-[calc(85vh-120px)] overflow-y-auto">
-                {/* Main Image */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-5 p-3 sm:p-4 lg:p-5 overflow-y-auto sm:overflow-y-auto lg:overflow-visible max-h-[calc(95vh-120px)] sm:max-h-[calc(90vh-140px)] lg:max-h-none">
+                {/* Main Image - Smaller to prevent scrolling */}
                 <div className="lg:col-span-2 order-1 lg:order-1">
-                  <div className="relative aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  <div className="relative aspect-[3/2] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
                     <Image
                       src={selectedProject.images[projectImageIndex]}
                       alt={`${selectedProject.title} - Image ${projectImageIndex + 1}`}
-                      width={800}
-                      height={600}
-                      className="w-full h-full object-cover"
+                      width={600}
+                      height={400}
+                      className="w-full h-full object-cover sm:object-contain"
                       priority
                     />
                     
-                    {/* Navigation Arrows */}
+                    {/* Navigation Arrows - Larger and more visible */}
                     {selectedProject.images.length > 1 && (
                       <>
                         <button
                           onClick={prevProjectImage}
-                          className="absolute left-2 sm:left-4 lg:left-4 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 lg:p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300"
+                          className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 p-2 sm:p-3 bg-black/70 hover:bg-black/90 text-white rounded-full transition-all duration-300 shadow-lg hover:scale-110"
                         >
-                          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
                         </button>
                         <button
                           onClick={nextProjectImage}
-                          className="absolute right-2 sm:right-4 lg:right-4 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 lg:p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-300"
+                          className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 p-2 sm:p-3 bg-black/70 hover:bg-black/90 text-white rounded-full transition-all duration-300 shadow-lg hover:scale-110"
                         >
-                          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                         </button>
                       </>
                     )}
 
-                    {/* Image Counter */}
-                    <div className="absolute bottom-2 sm:bottom-4 lg:bottom-4 right-2 sm:right-4 lg:right-4 bg-black/50 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
+                    {/* Image Counter - More prominent */}
+                    <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 bg-black/80 text-white px-3 py-1.5 rounded-full text-sm font-medium">
                       {projectImageIndex + 1} / {selectedProject.images.length}
                     </div>
                   </div>
+                  
+                </div>
 
-                  {/* Thumbnail Navigation */}
-                  {selectedProject.images.length > 1 && (
-                    <div className="flex gap-1.5 sm:gap-2 lg:gap-2 mt-3 sm:mt-4 lg:mt-4 overflow-x-auto pb-2 scrollbar-hide">
+                {/* Project Details */}
+                <div className="space-y-4 sm:space-y-5 lg:space-y-4 order-2 lg:order-2">
+                  <div>
+                    <Badge className="bg-yellow-500 text-black mb-2 sm:mb-3 text-xs sm:text-sm">
+                      {selectedProject.category}
+                    </Badge>
+                    <h4 className="font-bold text-base sm:text-lg text-gray-900 dark:text-white mb-2">
+                      Project Details
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm leading-relaxed">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+
+                  <div className="space-y-2.5 sm:space-y-3">
+                    <div className="flex items-center gap-2.5 sm:gap-3">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white">Date</p>
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">{selectedProject.date}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 sm:gap-3">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Camera className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 dark:text-green-400" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white">Photos</p>
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{selectedProject.images.length} images</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 sm:gap-3">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                        <span className="text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-bold">C</span>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white">Client</p>
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">{selectedProject.client}</p>
+                      </div>
+                    </div>
+                  </div>
+                 {/* Thumbnail Navigation - Larger and easier to click */}
+                 {selectedProject.images.length > 1 && (
+                    <div className="flex gap-2 sm:gap-3 mt-3 sm:mt-4 overflow-x-auto pb-2 scrollbar-hide">
                       {selectedProject.images.map((image, index) => (
                         <button
                           key={index}
                           onClick={() => setProjectImageIndex(index)}
-                          className={`flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-14 lg:h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                          className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 hover:scale-105 ${
                             index === projectImageIndex
-                              ? 'border-yellow-500 opacity-100'
-                              : 'border-gray-300 dark:border-gray-600 opacity-60 hover:opacity-80'
+                              ? 'border-yellow-500 opacity-100 shadow-lg'
+                              : 'border-gray-300 dark:border-gray-600 opacity-70 hover:opacity-100'
                           }`}
                         >
                           <Image
                             src={image}
                             alt={`Thumbnail ${index + 1}`}
-                            width={64}
-                            height={64}
+                            width={80}
+                            height={80}
                             className="w-full h-full object-cover"
                           />
                         </button>
                       ))}
                     </div>
                   )}
-                </div>
-
-                {/* Project Details */}
-                <div className="space-y-4 sm:space-y-6 lg:space-y-5 order-2 lg:order-2">
-                  <div>
-                    <Badge className="bg-yellow-500 text-black mb-2 sm:mb-3 lg:mb-3 text-xs sm:text-sm">
-                      {selectedProject.category}
-                    </Badge>
-                    <h4 className="font-bold text-base sm:text-lg lg:text-lg text-gray-900 dark:text-white mb-2">
-                      Project Details
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm lg:text-sm leading-relaxed">
-                      {selectedProject.description}
-                    </p>
-                  </div>
-
-                  <div className="space-y-2.5 sm:space-y-3 lg:space-y-3">
-                    <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-3">
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600 dark:text-blue-400" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs sm:text-sm lg:text-sm font-medium text-gray-900 dark:text-white">Date</p>
-                        <p className="text-xs sm:text-sm lg:text-sm text-gray-500 dark:text-gray-400 truncate">{selectedProject.date}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-3">
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Camera className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 dark:text-green-400" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs sm:text-sm lg:text-sm font-medium text-gray-900 dark:text-white">Photos</p>
-                        <p className="text-xs sm:text-sm lg:text-sm text-gray-500 dark:text-gray-400">{selectedProject.images.length} images</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-3">
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 lg:w-8 lg:h-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-purple-600 dark:text-purple-400 text-xs sm:text-sm font-bold">C</span>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-xs sm:text-sm lg:text-sm font-medium text-gray-900 dark:text-white">Client</p>
-                        <p className="text-xs sm:text-sm lg:text-sm text-gray-500 dark:text-gray-400 truncate">{selectedProject.client}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-3 sm:pt-4 lg:pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="pt-3 sm:pt-4 border-t border-gray-200 dark:border-gray-700">
                     <Button
                       onClick={closeProjectDialog}
-                      className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded-lg transition-all duration-300 text-sm sm:text-base"
+                      className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2.5 px-4 rounded-lg transition-all duration-300 text-sm sm:text-base"
                     >
                       Close Gallery
                     </Button>
@@ -1571,7 +1571,7 @@ This message was sent from the Teoflys Photography website contact form.
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300"
-                    placeholder="dudufredu@gmail.com"
+                    placeholder="duxforreally@gmail.com"
                   />
                 </div>
 

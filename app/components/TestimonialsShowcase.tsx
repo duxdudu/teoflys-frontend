@@ -32,13 +32,13 @@ const categoryLabels: { [key: string]: string } = {
 };
 
 const categoryColors: { [key: string]: string } = {
-  wedding: 'bg-pink-500/20 text-pink-300 border-pink-500/30',
-  portrait: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-  landscape: 'bg-green-500/20 text-green-300 border-green-500/30',
-  food: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
-  events: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-  commercial: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
-  other: 'bg-gray-500/20 text-gray-300 border-gray-500/30'
+  wedding: 'bg-pink-100 text-pink-700 border-pink-300 dark:bg-pink-500/20 dark:text-pink-300 dark:border-pink-500/30',
+  portrait: 'bg-blue-100 text-blue-700 border-blue-300 dark:bg-blue-500/20 dark:text-blue-300 dark:border-blue-500/30',
+  landscape: 'bg-green-100 text-green-700 border-green-300 dark:bg-green-500/20 dark:text-green-300 dark:border-green-500/30',
+  food: 'bg-orange-100 text-orange-700 border-orange-300 dark:bg-orange-500/20 dark:text-orange-300 dark:border-orange-500/30',
+  events: 'bg-purple-100 text-purple-700 border-purple-300 dark:bg-purple-500/20 dark:text-purple-300 dark:border-purple-500/30',
+  commercial: 'bg-indigo-100 text-indigo-700 border-indigo-300 dark:bg-indigo-500/20 dark:text-indigo-300 dark:border-indigo-500/30',
+  other: 'bg-gray-100 text-gray-700 border-gray-300 dark:bg-gray-500/20 dark:text-gray-300 dark:border-gray-500/30'
 };
 
 
@@ -162,11 +162,11 @@ export default function TestimonialsShowcase({
     return (
       <div className={`${className}`}>
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-white mb-4">Featured Testimonials</h2>
-          <p className="text-gray-300">Hear from some of our satisfied clients</p>
-          <div className="mb-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg">
-            <p className="text-red-400 text-sm">API Error: {error}</p>
-            <p className="text-red-300 text-xs">Showing sample testimonials below</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Featured Testimonials</h2>
+          <p className="text-gray-600 dark:text-gray-300">Hear from some of our satisfied clients</p>
+          <div className="mb-4 p-3 bg-red-100 border-2 border-red-300 rounded-lg dark:bg-red-500/20 dark:border-red-500/30">
+            <p className="text-red-700 text-sm dark:text-red-400">API Error: {error}</p>
+            <p className="text-red-600 text-xs dark:text-red-300">Showing sample testimonials below</p>
           </div>
         </div>
         
@@ -174,7 +174,7 @@ export default function TestimonialsShowcase({
           {fallbackTestimonials.map((testimonial) => (
             <Card 
               key={testimonial._id}
-              className="bg-white/5 backdrop-blur-sm border-white/10 hover:border-yellow-500/30 transition-all duration-300 hover:scale-105"
+              className="bg-white border-2 border-gray-200 shadow-lg hover:shadow-xl dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 hover:border-yellow-400 dark:hover:border-yellow-500/30 transition-all duration-300 hover:scale-105"
             >
               <CardContent className="p-6">
                 <div className="text-center">
@@ -182,20 +182,20 @@ export default function TestimonialsShowcase({
                     {renderStars(testimonial.rating)}
                   </div>
                   
-                  <Quote className="w-8 h-8 text-yellow-400/60 mx-auto mb-4" />
+                  <Quote className="w-8 h-8 text-yellow-500 dark:text-yellow-400/60 mx-auto mb-4" />
                   
-                  <blockquote className="text-gray-300 italic mb-6 leading-relaxed">
+                  <blockquote className="text-gray-800 dark:text-gray-300 italic mb-6 leading-relaxed">
                     "{testimonial.message}"
                   </blockquote>
                   
-                  <div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-yellow-400 font-bold text-lg">
+                  <div className="w-16 h-16 bg-yellow-100 border-2 border-yellow-300 rounded-full flex items-center justify-center mx-auto mb-3 dark:bg-yellow-500/20 dark:border-yellow-500/30">
+                    <span className="text-yellow-700 font-bold text-lg dark:text-yellow-400">
                       {testimonial.name.charAt(0).toUpperCase()}
                     </span>
                   </div>
                   
-                  <h4 className="font-semibold text-white mb-2">{testimonial.name}</h4>
-                  <Badge className={`${categoryColors[testimonial.category]} text-xs`}>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{testimonial.name}</h4>
+                  <Badge className={`${categoryColors[testimonial.category]} text-xs border-2`}>
                     {categoryLabels[testimonial.category]}
                   </Badge>
                 </div>
@@ -207,7 +207,7 @@ export default function TestimonialsShowcase({
         {showViewAll && (
           <div className="text-center mt-8">
             <Link href="/testimonials">
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <Button variant="outline" className="border-2 border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-white/20 dark:text-white dark:hover:bg-white/10">
                 See More Testimonials
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -225,41 +225,41 @@ export default function TestimonialsShowcase({
     return (
       <div className={`${className}`}>
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-white mb-4">What Our Clients Say</h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">What Our Clients Say</h2>
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Real experiences from our valued clients across different photography services
           </p>
         </div>
         
-        <Card className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 backdrop-blur-sm border-yellow-500/20 max-w-4xl mx-auto">
+        <Card className="bg-gradient-to-r from-yellow-100 to-orange-100 border-2 border-yellow-300 dark:from-yellow-500/10 dark:to-orange-500/10 dark:backdrop-blur-sm dark:border-yellow-500/20 max-w-4xl mx-auto">
           <CardContent className="p-8">
             <div className="text-center">
               <div className="flex justify-center mb-6">
                 {renderStars(featured.rating)}
               </div>
               
-              <blockquote className="text-2xl text-white italic mb-6 leading-relaxed">"{featured.message}"</blockquote>
+              <blockquote className="text-2xl text-gray-800 dark:text-white italic mb-6 leading-relaxed">"{featured.message}"</blockquote>
 
               {featured.adminNotes && (
-                <div className="mb-6 p-4 bg-white/5 border border-white/10 rounded-lg">
-                  <div className="text-xs text-gray-400 mb-1">Reply from studio</div>
-                  <p className="text-sm text-gray-200">{featured.adminNotes}</p>
+                <div className="mb-6 p-4 bg-white border-2 border-gray-200 rounded-lg dark:bg-white/5 dark:border-white/10">
+                  <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">Reply from studio</div>
+                  <p className="text-sm text-gray-700 dark:text-gray-200">{featured.adminNotes}</p>
                 </div>
               )}
                
               <div className="flex items-center justify-center gap-4">
-                <div className="w-20 h-20 bg-yellow-500/20 rounded-full flex items-center justify-center">
-                  <span className="text-yellow-400 font-bold text-3xl">
+                <div className="w-20 h-20 bg-yellow-100 border-2 border-yellow-300 rounded-full flex items-center justify-center dark:bg-yellow-500/20 dark:border-yellow-500/30">
+                  <span className="text-yellow-700 font-bold text-3xl dark:text-yellow-400">
                     {featured.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-white text-xl">{featured.name}</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white text-xl">{featured.name}</h4>
                   <div className="flex items-center gap-3">
-                  <Badge className={`${categoryColors[featured.category]} border`}>
+                  <Badge className={`${categoryColors[featured.category]} border-2`}>
                     {categoryLabels[featured.category]}
                     </Badge>
-                    <span className="text-gray-400">
+                    <span className="text-gray-600 dark:text-gray-400">
                       {formatDate(featured.createdAt)}
                     </span>
                   </div>
@@ -290,15 +290,15 @@ export default function TestimonialsShowcase({
     return (
       <div className={`${className}`}>
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-white mb-4">Featured Testimonials</h2>
-          <p className="text-gray-300">Hear from some of our satisfied clients</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Featured Testimonials</h2>
+          <p className="text-gray-600 dark:text-gray-300">Hear from some of our satisfied clients</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {featured.map((testimonial) => (
             <Card 
               key={testimonial._id}
-              className="bg-white/5 backdrop-blur-sm border-white/10 hover:border-yellow-500/30 transition-all duration-300 hover:scale-105"
+              className="bg-white border-2 border-gray-200 shadow-lg hover:shadow-xl dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 hover:border-yellow-400 dark:hover:border-yellow-500/30 transition-all duration-300 hover:scale-105"
             >
               <CardContent className="p-6">
                 <div className="text-center">
@@ -306,25 +306,25 @@ export default function TestimonialsShowcase({
                     {renderStars(testimonial.rating)}
                   </div>
                   
-                  <Quote className="w-8 h-8 text-yellow-400/60 mx-auto mb-4" />
+                  <Quote className="w-8 h-8 text-yellow-500 dark:text-yellow-400/60 mx-auto mb-4" />
                   
-                  <blockquote className="text-gray-300 italic mb-4 leading-relaxed">"{testimonial.message}"</blockquote>
+                  <blockquote className="text-gray-800 dark:text-gray-300 italic mb-4 leading-relaxed">"{testimonial.message}"</blockquote>
 
                   {testimonial.adminNotes && (
-                    <div className="mb-4 p-3 bg-white/5 border border-white/10 rounded-lg">
-                      <div className="text-xs text-gray-400 mb-1">Reply from studio</div>
-                      <p className="text-sm text-gray-200">{testimonial.adminNotes}</p>
+                    <div className="mb-4 p-3 bg-gray-50 border-2 border-gray-200 rounded-lg dark:bg-white/5 dark:border-white/10">
+                      <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">Reply from studio</div>
+                      <p className="text-sm text-gray-700 dark:text-gray-200">{testimonial.adminNotes}</p>
                     </div>
                   )}
                   
-                  <div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-yellow-400 font-bold text-lg">
+                  <div className="w-16 h-16 bg-yellow-100 border-2 border-yellow-300 rounded-full flex items-center justify-center mx-auto mb-3 dark:bg-yellow-500/20 dark:border-yellow-500/30">
+                    <span className="text-yellow-700 font-bold text-lg dark:text-yellow-400">
                       {testimonial.name.charAt(0).toUpperCase()}
                     </span>
                   </div>
                   
-                  <h4 className="font-semibold text-white mb-2">{testimonial.name}</h4>
-                  <Badge className={`${categoryColors[testimonial.category]} text-xs`}>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{testimonial.name}</h4>
+                  <Badge className={`${categoryColors[testimonial.category]} text-xs border-2`}>
                     {categoryLabels[testimonial.category]}
                   </Badge>
                 </div>
@@ -336,7 +336,7 @@ export default function TestimonialsShowcase({
         {showViewAll && (
           <div className="text-center mt-8">
             <Link href="/testimonials">
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <Button variant="outline" className="border-2 border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-white/20 dark:text-white dark:hover:bg-white/10">
                 See More Testimonials
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -352,25 +352,25 @@ export default function TestimonialsShowcase({
     return (
       <div className={`${className}`}>
         <div className="flex items-center gap-2 mb-4">
-          <Star className="w-5 h-5 text-yellow-400 fill-current" />
-          <span className="text-white font-medium">Client Testimonials</span>
+          <Star className="w-5 h-5 text-yellow-500 dark:text-yellow-400 fill-current" />
+          <span className="text-gray-900 dark:text-white font-medium">Client Testimonials</span>
         </div>
         
         <div className="space-y-3">
           {displayTestimonials.slice(0, 4).map((testimonial) => (
             <div key={testimonial._id} className="flex items-start gap-3">
-              <div className="w-8 h-8 bg-yellow-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-yellow-400 font-bold text-xs">
+              <div className="w-8 h-8 bg-yellow-100 border-2 border-yellow-300 rounded-full flex items-center justify-center flex-shrink-0 dark:bg-yellow-500/20 dark:border-yellow-500/30">
+                <span className="text-yellow-700 font-bold text-xs dark:text-yellow-400">
                   {testimonial.name.charAt(0).toUpperCase()}
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-gray-300 line-clamp-2">
+                <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2">
                   "{testimonial.message}"
                 </p>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="text-xs text-white font-medium">{testimonial.name}</span>
-                  <Badge className={`${categoryColors[testimonial.category]} text-xs px-2 py-0`}>
+                  <span className="text-xs text-gray-900 dark:text-white font-medium">{testimonial.name}</span>
+                  <Badge className={`${categoryColors[testimonial.category]} text-xs px-2 py-0 border-2`}>
                     {categoryLabels[testimonial.category]}
                   </Badge>
                 </div>
@@ -382,7 +382,7 @@ export default function TestimonialsShowcase({
         {showViewAll && (
           <div className="mt-4">
             <Link href="/testimonials">
-              <Button variant="ghost" size="sm" className="text-yellow-400 hover:text-yellow-300 p-0 h-auto">
+              <Button variant="ghost" size="sm" className="text-yellow-600 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300 p-0 h-auto">
                 View all testimonials
                 <ArrowRight className="w-3 h-3 ml-1" />
               </Button>
@@ -397,15 +397,15 @@ export default function TestimonialsShowcase({
   return (
     <div className={`${className}`}>
       <div className="text-center mb-6 sm:mb-8 px-2">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-4">Client Testimonials</h2>
-        <p className="text-gray-300 text-sm sm:text-base">Discover what our clients have to say</p>
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-4">Client Testimonials</h2>
+        <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">Discover what our clients have to say</p>
       </div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {displayTestimonials.map((testimonial) => (
           <Card 
             key={testimonial._id}
-            className="bg-white/5 backdrop-blur-sm border-white/10 hover:border-yellow-500/30 transition-all duration-300 hover:scale-105"
+            className="bg-white border-2 border-gray-200 shadow-lg hover:shadow-xl dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 hover:border-yellow-400 dark:hover:border-yellow-500/30 transition-all duration-300 hover:scale-105"
           >
           <CardContent className="p-4 sm:p-6">
               <div className="text-center">
@@ -413,29 +413,29 @@ export default function TestimonialsShowcase({
                   {renderStars(testimonial.rating)}
                 </div>
                 
-                <Quote className="w-6 h-6 text-yellow-400/60 mx-auto mb-3" />
+                <Quote className="w-6 h-6 text-yellow-500 dark:text-yellow-400/60 mx-auto mb-3" />
                 
-                <blockquote className="text-gray-300 italic mb-3 leading-relaxed">"{testimonial.message}"</blockquote>
+                <blockquote className="text-gray-800 dark:text-gray-300 italic mb-3 leading-relaxed">"{testimonial.message}"</blockquote>
 
                 {testimonial.adminNotes && (
-                  <div className="mb-3 p-3 bg-white/5 border border-white/10 rounded-lg">
-                    <div className="text-xs text-gray-400 mb-1">Reply from studio</div>
-                    <p className="text-sm text-gray-200">{testimonial.adminNotes}</p>
+                  <div className="mb-3 p-3 bg-gray-50 border-2 border-gray-200 rounded-lg dark:bg-white/5 dark:border-white/10">
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">Reply from studio</div>
+                    <p className="text-sm text-gray-700 dark:text-gray-200">{testimonial.adminNotes}</p>
                   </div>
                 )}
                 
-                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-yellow-400 font-bold text-sm sm:text-base">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-yellow-100 border-2 border-yellow-300 rounded-full flex items-center justify-center mx-auto mb-3 dark:bg-yellow-500/20 dark:border-yellow-500/30">
+                  <span className="text-yellow-700 font-bold text-sm sm:text-base dark:text-yellow-400">
                     {testimonial.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
                 
-                <h4 className="font-medium text-white mb-2 text-sm sm:text-base break-words">{testimonial.name}</h4>
+                <h4 className="font-medium text-gray-900 dark:text-white mb-2 text-sm sm:text-base break-words">{testimonial.name}</h4>
                 <div className="flex items-center justify-center gap-2">
-                  <Badge className={`${categoryColors[testimonial.category]} text-xs`}>
+                  <Badge className={`${categoryColors[testimonial.category]} text-xs border-2`}>
                     {categoryLabels[testimonial.category]}
                   </Badge>
-                  <span className="text-gray-400 text-xs sm:text-sm">
+                  <span className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
                     {formatDate(testimonial.createdAt)}
                   </span>
                 </div>
