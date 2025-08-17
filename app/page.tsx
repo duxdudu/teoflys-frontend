@@ -113,8 +113,8 @@ export default function Home() {
       category: "Portrait Photography",
       description: "Professional headshots and personal branding photography for a successful entrepreneur. Clean, modern style that captures personality and professionalism.",
       stats: "PORTRAIT • 8 PHOTOS • COMPLETED",
-      coverImage: "/portrait.jpg",
-      images: ["/portrait.jpg", "/portrait2.jpg", "/portrait3.jpg", "/portrait4.jpg", "/portrait5.jpg", "/portrait6.jpg", "/portrait7.jpg", "/portrait8.jpg"],
+      coverImage: "/Portrait.jpg",
+      images: ["/Portrait.jpg", "/Portrait2.jpg", "/Portrait3.jpg", "/Portrait4.jpg", "/Portrait5.jpg", "/Portrait6.jpg", "/Portrait7.jpg", "/Portrait8.jpg"],
       client: "Emma Rodriguez",
       date: "May 2024"
     },
