@@ -124,8 +124,8 @@ export default function Home() {
       category: "Commercial Photography",
       description: "Complete restaurant photography including interior shots, food styling, and team portraits. Created a comprehensive visual brand package for marketing materials.",
       stats: "COMMERCIAL • 9 PHOTOS • COMPLETED",
-      coverImage: "/commercial1.jpg",
-      images: ["/commercial1.jpg", "/commercial2.jpg", "/commercial3.jpg", "/commercial4.jpg", "/commercial5.jpg", "/commercial6.jpg", "/commercial7.jpg", "/commercial8.jpg"],
+      coverImage: "/Commercial1.jpg",
+      images: ["/Commercial1.jpg", "/Commercial2.jpg", "/Commercial3.jpg", "/Commercial4.jpg", "/Commercial5.jpg", "/Commercial6.jpg", "/Commercial7.jpg", "/Commercial8.jpg"],
       client: "Bella Vista Restaurant",
       date: "April 2024"
     },
@@ -1053,12 +1053,12 @@ This message was sent from the Teoflys Photography website contact form.
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-5 p-3 sm:p-4 lg:p-5 max-h-[calc(95vh-80px)] sm:max-h-[calc(90vh-140px)] lg:max-h-[calc(85vh-120px)] overflow-y-auto">
                 {/* Main Image */}
                 <div className="lg:col-span-2 order-1 lg:order-1">
-                  <div className="relative aspect-[2/3] sm:aspect-[4/3] lg:aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  <div className="relative aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
                     <Image
                       src={selectedProject.images[projectImageIndex]}
                       alt={`${selectedProject.title} - Image ${projectImageIndex + 1}`}
-                      width={400}
-                      height={200}
+                      width={800}
+                      height={600}
                       className="w-full h-full object-cover"
                       priority
                     />
